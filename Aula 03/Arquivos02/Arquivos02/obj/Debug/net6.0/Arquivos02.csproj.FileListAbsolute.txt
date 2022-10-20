@@ -1,0 +1,15 @@
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\bin\Debug\net6.0\Arquivos02.exe
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\bin\Debug\net6.0\Arquivos02.deps.json
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\bin\Debug\net6.0\Arquivos02.runtimeconfig.json
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\bin\Debug\net6.0\Arquivos02.dll
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\bin\Debug\net6.0\Arquivos02.pdb
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.csproj.AssemblyReference.cache
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.AssemblyInfoInputs.cache
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.AssemblyInfo.cs
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.csproj.CoreCompileInputs.cache
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.dll
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\refint\Arquivos02.dll
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.pdb
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\Arquivos02.genruntimeconfig.cache
+C:\Users\pablo.tronco\source\repos\Arquivos02\Arquivos02\obj\Debug\net6.0\ref\Arquivos02.dll
