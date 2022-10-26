@@ -1,0 +1,15 @@
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.csproj.AssemblyReference.cache
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.AssemblyInfoInputs.cache
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.AssemblyInfo.cs
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.csproj.CoreCompileInputs.cache
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\bin\Debug\net6.0\ExArquivos01.exe
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\bin\Debug\net6.0\ExArquivos01.deps.json
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\bin\Debug\net6.0\ExArquivos01.runtimeconfig.json
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\bin\Debug\net6.0\ExArquivos01.dll
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\bin\Debug\net6.0\ExArquivos01.pdb
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.dll
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\refint\ExArquivos01.dll
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.pdb
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ExArquivos01.genruntimeconfig.cache
+C:\Users\pablo.tronco\source\repos\ExArquivos01\ExArquivos01\obj\Debug\net6.0\ref\ExArquivos01.dll
