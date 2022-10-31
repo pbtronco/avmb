@@ -1,0 +1,38 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+}
+a{
+    text-decoration: none;
+}
+a.hover{
+    color:red;
+}
+nav {
+    color: black;
+    text-align: center;
+}
+h1{
+    text-align: center;
+    margin-top: 30px;
+    text-shadow: 0 0 10px #8c5627bb, 2px 2px 2px rgba(206,89,55,0);
+}
+img{
+    max-width: 100%;
+    display: block;
+}
+
+.fixarRodape {
+    bottom: 0;
+    position: fixed;
+    width: 95%;
+    text-align: center;
+    background-color: black;
+    color: #ffffff;
+    padding: 10px;
+    margin-top: 10px;
+}
