@@ -1,0 +1,84 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+a:hover{
+    color: red;
+}
+a.visited{
+    text-decoration: none;
+}
+table{
+    color:rgb(255, 255, 255);
+    padding: 10px;
+    box-shadow: 0 0 10px #edededbb, 2px 2px 2px rgba(245, 243, 242, 0);
+}
+tr, td {
+    padding: 10px;
+    text-align: center;
+}
+nav {
+    color: black;
+    text-align: center;
+}
+.h1-menu{
+    text-align: center;
+    margin: 10px;
+    color:rgb(255, 255, 255);
+    text-shadow: 0 0 10px #8c5627bb, 2px 2px 2px rgba(206,89,55,0);
+}
+h1{
+    color: aqua;
+    padding: 5px;
+}
+h2{
+    color: red;
+    padding: 5px;
+}
+p{
+    color: #fff;
+}
+img{
+    max-width: 100%;
+    display: block;
+}
+.container_geral{
+    display: flex;
+    border: 1px solid #666666;
+    box-shadow: 5px 5px 15px -8px rgb(255, 255, 255);
+    padding: 20px;
+    margin-top: 20px;    
+}
+.container_geral2{
+    display: block;
+    border: 1px solid #666666;
+    box-shadow: 5px 5px 15px -8px rgb(255, 255, 255);
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.container_geral2:hover {
+    box-shadow: 5px 5px 15px -8px rgb(255, 1, 1);
+}
+label{
+    color: #fff;
+}
+
+.fixarRodape {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: #ffffff;
+    padding: 10px;
+    margin-top: 10px;
+}
