@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercicio 2</title>
+</head>
+<script type='text/javascript'>
+    function ColorRed() {
+        var element = document.getElementById("trocar");
+        element.style.backgroundColor = 'red';
+    }
+
+    function ColorGreen() {
+        var element = document.getElementById("trocar");
+        element.style.backgroundColor = 'green';
+    }
+
+    function ColorBlue() {
+        var element = document.getElementById("trocar");
+        element.style.backgroundColor = 'blue';
+    }
+
+    function ColorYellow() {
+        var element = document.getElementById("trocar");
+        element.style.backgroundColor = 'yellow';
+    }
+</script>
+
+<body id="trocar">
+    <input type="radio" name="cores" id="red" onclick="ColorRed()">Vermelho</input>
+    <input type="radio" name="cores" id="green" onclick="ColorGreen()">Verde</input>
+    <input type="radio" name="cores" id="blue" onclick="ColorBlue()">Azul</input>
+    <input type="radio" name="cores" id="yellow" onclick="ColorYellow()">Amarelo</input>
+</body>
+
+</html>

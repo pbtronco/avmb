@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercicio 04</title>
+</head>
+<script>
+    function esconderMostrar() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+<body>
+    <button onclick="esconderMostrar()">Parágrafo</button>
+
+    <div id="myDIV">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus voluptate facere soluta earum nostrum beatae odio qui quod magni.
+             Aspernatur asperiores porro voluptate vero, quia neque inventore nesciunt consectetur possimus.</p>
+    </div>
+</body>
+
+</html>
