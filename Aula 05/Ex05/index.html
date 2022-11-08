@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 05</title>
+    <style>
+        #botao {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Selecione</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input onclick="ocultar()" type="checkbox">Botão 1</td>
+                    <td><input onclick="ocultar()" type="checkbox">Botão 2</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="tiny button" id="botao">Enviar</button>
+    </form>
+
+    <script>
+        checks = document.querySelectorAll('input[type="checkbox"]');
+        checks.forEach(function (ck) {
+            ck.addEventListener("click", function () {
+                let checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+                let botao = document.getElementById('botao');
+                if (checked == 2) {
+                    botao.style.display = "block";
+                } else {
+                    botao.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
