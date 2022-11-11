@@ -1,0 +1,42 @@
+create table Contatos
+(
+	nome varchar(20),
+	email varchar(30),
+	datanasc date,
+	celular varchar(20)
+)
+
+CREATE TABLE tbl_autores (
+	ID_Autor integer CONSTRAINT pk_id_autor PRIMARY KEY,
+	Nome_Autor varchar(30) NOT NULL,
+	Sobrenome_Autor varchar(40) NOT NULL,
+	Data_Nasc date
+);
+insert into tbl_autores values(1,'José','da Silva','1993-07-26');
+
+CREATE TABLE tbl_livros (
+ID_Livro SERIAL CONSTRAINT pk_id_livro PRIMARY KEY,
+Nome_Livro varchar(50) NOT NULL,
+Autor integer NOT NULL,
+Editora integer NOT NULL,
+Data_Pub date,
+Genero integer NOT NULL,
+Preco_Livro money,
+FOREIGN KEY (Autor) REFERENCES tbl_autores (ID_Autor));
+
+select * from tbl_autores;
+
+insert into tbl_autores values(2,'Pablo', 'Tronco', '2022-11-10');
+
+insert into tbl_autores (id_autor, nome_autor, sobrenome_autor) values (3,'Ana','Silva');
+
+insert into tbl_livros values(1, 'AAAAAA', 3, 5,'1993-07-26', 10);
+
+insert into tbl_livros values(2, 'AAAAAA', 3, 5,'1993-07-26', 10);
+
+insert into tbl_autores values (4, 'Manuel', 'de Antonio', '1830-11-17');
+
+insert into tbl_livros (nome_livro, autor, editora, data_pub, genero, preco_livro)
+values ('Memória de um sargento', 4, 3, '1600-11-10', 5, 26.00)
+
+select * from tbl_livros where id_livro = 3
