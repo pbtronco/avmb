@@ -1,0 +1,47 @@
+create table marcas
+(
+	ID_Marcas serial,
+	marca varchar(50),
+	nome varchar(50),
+	PRIMARY KEY(ID_Marcas)
+)
+
+create table carros
+(
+	ID_Carros serial,
+	marca int,
+	modelo varchar(50),
+	ano int,
+	cor varchar(50),
+	PRIMARY KEY (ID_Carros),
+	FOREIGN KEY (marca) REFERENCES marcas(ID_Marcas)
+)
+
+insert into marcas (marca, nome) values('VW','Volkswagem');
+insert into marcas (marca, nome) values('Ford','Ford');
+insert into marcas (marca, nome) values('GM','General Motors');
+insert into marcas (marca, nome) values('Fiat','Fiat');
+insert into marcas (marca, nome) values('Renault','Renault');
+insert into marcas (marca, nome) values('MB','Mercedes Bens');
+
+insert into carros (marca, modelo, ano, cor) values (1,'Fox',2008,'preto');
+insert into carros (marca, modelo, ano, cor) values (2,'Ecosport',2009,'verde');
+insert into carros (marca, modelo, ano, cor) values(2,'KA',2008,'prata');
+insert into carros (marca, modelo, ano, cor) values(4,'Punto',2008,'branco');
+insert into carros (marca, modelo, ano, cor) values(4,'Uno',2007,'preto');
+insert into carros (marca, modelo, ano, cor) values(4,'Stilo',200,'prata');
+insert into carros (marca, modelo, ano, cor) values(4,'Uno',2005,'prata');
+insert into carros (marca, modelo, ano, cor) values(4,'Stilo',2008,'verde');
+insert into carros (marca, modelo, ano, cor) values (null, 'Fusca', 1977, 'preto');
+insert into carros (marca, modelo, ano, cor) values(4,'Uno',2009,'branco');
+insert into carros (marca, modelo, ano, cor) values(3,'Astra',2010,'prata');
+insert into carros (marca, modelo, ano, cor) values(2,'Fusion',2010,'prata');
+insert into carros (marca, modelo, ano, cor) values(3,'Montana',2007,'azul');
+insert into carros (marca, modelo, ano, cor) values(5,'Clio',2008,'verde');
+
+select carros.modelo, marcas.marca from carros
+join marcas on marcas.id_marcas = carros.marca
+
+select carros.modelo, marcas.marca
+from carros, marcas
+where carros.marca = marcas.id_marcas

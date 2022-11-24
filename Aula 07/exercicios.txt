@@ -1,0 +1,14 @@
+select carros.modelo, marcas.marca from carros
+left join marcas on marcas.id_marcas = carros.marca
+where marcas.marca = 'VW' or marcas.marca = 'Fiat' or marcas.marca is null
+
+select carros.modelo, marcas.marca from carros
+right join marcas on marcas.id_marcas = carros.marca
+where carros.modelo is null
+
+select carros.modelo, marcas.marca from carros
+left join marcas on marcas.id_marcas = carros.marca
+where marcas.marca = 'GM' or marcas.marca = 'Ford' order by modelo
+
+select * from marcas.marca where marcas in
+(select id_marcas, marcas.marca from carros, marcas group by id_marcas having count(*)>3)
