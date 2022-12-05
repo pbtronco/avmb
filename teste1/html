@@ -1,0 +1,854 @@
+<!--begin:style-->
+<style>
+  .mt-10 {
+    margin-top: 10px;
+  }
+
+  .mt-8 {
+    margin-top: 8px;
+  }
+
+  .mb-8 {
+    margin-bottom: 8px;
+  }
+
+  .mt--2 {
+    margin-top: -2px;
+  }
+
+  .mt--5 {
+    margin-top: -5px;
+  }
+
+  .ml-3 {
+    margin-left: 3px;
+  }
+
+  .ml-9 {
+    margin-left: 9px;
+  }
+
+  .pl-8 {
+    padding-left: 8px;
+  }
+
+  .pr-8 {
+    padding-right: 8px;
+  }
+
+  .f-r {
+    float: right;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .bg-white {
+    background-color: #fff;
+  }
+
+  .jc-spacebt {
+    justify-content: space-between;
+  }
+
+  .btn-pg {
+    padding: 0 30px 0 30px;
+  }
+
+  .btn-font-awesome:hover {
+    background-color: #1988cc !important;
+    transition: 0.3s;
+  }
+</style>
+<!--end:style-->
+
+<!--begin:dom-->
+<!-- Interface -->
+<div id="interface">
+  <div class="pure-g pure-u-24-24 mt--5 bg-white">
+    <div id="tabParameters"></div>
+  </div>
+</div>
+
+<!-- Telas -->
+<div id="template-gerenciamento-de-menus-e-perfis" class="pure-g pure-u-24-24" style="display: none">
+  <div class="label mt-8 pl-8">
+    <label class="label-menus-cadastrados" style="display: none">Menus cadastrados</label>
+    <label class="label-perfis-cadastrados" style="display: none">Perfis cadastrados</label>
+  </div>
+
+  <div class="flex mt--2 pl-8 pr-8">
+    <div class="select-box-menus-perfis-cadastrados"></div>
+    <div class="btn-add ml-9 btn-pg"></div>
+    <div class="btn-edit ml-3 btn-pg"></div>
+    <div class="btn-remove ml-3 btn-pg"></div>
+  </div>
+
+  <div class="pl-8 pr-8">
+    <div class="label mt-8">
+      <label class="label-perfis-vinculados-menu" style="display: none">Perfis vinculados ao menu</label>
+      <label class="label label-menus-vinculados-perfil" style="display: none">Menus vinculados ao perfil</label>
+      <div class="tag-box-perfis-menus-vinculados mt--2 mb-8" style="display: none"></div>
+    </div>
+  </div>
+
+  <div class="flex pr-8 f-r">
+    <div class="btn-save btn-pg mb-8" style="display: none"></div>
+    <div class="btn-cancel btn-pg ml-3 mb-8" style="display: none"></div>
+  </div>
+</div>
+
+<!-- Pop-up -->
+<div id="template-popup-gerenciamento-de-menus-e-perfis" class="pure-g pure-u-24-24" style="display: none">
+  <div>
+    <label class="label">Item Tabela</label>
+    <div class="number-box-item-tabela"></div>
+  </div>
+  <div class="mt-10">
+    <label class="label">Descrição</label>
+    <div class="text-box-descricao"></div>
+  </div>
+  <div class="mt-10">
+    <label class="label label-menu-ativo" style="display: none">Menu Ativo?</label>
+    <label class="label label-perfil-ativo" style="display: none">Perfil Ativo?</label>
+    <div class="select-box-menu-perfil-ativo"></div>
+  </div>
+  <div class="mt-10">
+    <label class="label label-menu-sup" style="display: none">Menu Superior</label>
+    <label class="label label-perfil-sup" style="display: none">Perfil Superior</label>
+    <div class="select-box-menu-superior"></div>
+  </div>
+  <div class="mt-10">
+    <label class="label label-sigla" style="display: none">Sigla</label>
+    <div class="text-box-sigla"></div>
+  </div>
+  <div class="mt-10">
+    <label class="label">Aux Integer</label>
+    <div class="number-box-aux-integer"></div>
+  </div>
+  <div class="mt-10 label-obs">
+    <label class="label">Observação</label>
+    <div class="text-box-observacao"></div>
+  </div>
+  <div class="mt-10">
+    <label class="label label-icon" style="display: none">Ícone</label>
+    <label class="label label-auxchar" style="display: none">Aux Char</label>
+  </div>
+  <div class="flex">
+    <div class="text-box-auxchar"></div>
+    <a href="https://fontawesome.com/search?m=free" class="fontawesome" target="_blank">
+      <div class="btn-font-awesome ml-3"></div>
+    </a>
+  </div>
+  <div class="flex jc-spacebt mt-10">
+    <div class="btn-salvar-popup"></div>
+    <div class="btn-cancelar-popup"></div>
+  </div>
+</div>
+<!--end:dom-->
+
+<!--begin:script-->
+<script>
+  var instanceUI = (function () {
+    var idInstancia = parseInt($("#instancia").val()); //O método val() é um método embutido em jQuery que é usado para retornar ou definir o valor do atributo para os elementos selecionados.
+    var idVersao = parseInt($("#versao").val()); //A função parseInt() analisa um argumento string e retorna um inteiro na base especificada.
+    var idInstVarMemoria = null;
+    var objMemoria = null;
+    var dados = {};
+    var interface = $("#interface");
+    var templateGerenciamentoMenusPerfis = $("#template-gerenciamento-de-menus-e-perfis");
+    var templatePopUpGerenciamentoMenusPerfis = $("#template-popup-gerenciamento-de-menus-e-perfis");
+
+    function Repository() {
+      return $.BPMAction(145210212).data("source");
+    }
+
+    function initDados() {
+      //memoriaInstancia é um obj criado ao inicializar a instância do Portal do Cidadão, cujas chaves serão utilizadas ao longo de todo portal e subprocessos, como dados de navegação, login, etc. Então toda vez que se inicia um novo subprocesso esse get é feito pra trazer o memoriaInstancia do lua.
+      Repository().get("getVariavelMemoria", [{
+        name: "ID_INSTANCIA",
+        value: idInstancia,
+      }], (data) => {
+        idInstVarMemoria = data[0].ID_INSTANCIA_VAR;
+        App.service.luaToJson(idInstVarMemoria, null, (obj) => {
+          objMemoria = obj;
+        });
+        initInterface();
+      }, () => App.ui.showGenericError()
+      );
+    }
+
+    //Esta função verifica o tipo de dado de "itemData.renderer", que por conseguinte, deve ser exatamente igual a "function". A seguir, a explicação do uso de cada parâmetro:
+    /*
+      itemData: Recolhe os dados de um item com uma chave específica.
+      itemIndex: Identifica um item pelo seu índice (chave específica).
+      itemElement: Recolhe o elemento de um item encontrado.
+      */
+    function initItemInterface(itemData, itemIndex, itemElement) {
+      if (typeof itemData.renderer === "function") {
+        itemData.renderer(itemData, itemIndex, itemElement);
+      }
+    }
+
+    function initMenus(itemData, itemIndex, itemElement) {
+      var template = App.ui.cloneTo(templateGerenciamentoMenusPerfis, itemElement).show();
+      template.find(".label-menus-cadastrados").show();
+
+      App.dx.selectBox(template.find(".select-box-menus-perfis-cadastrados"), {
+        width: 10000,
+        items: getMenus(),
+        searchEnabled: true,
+        valueExpr: "ITEM_TABELA",
+        displayExpr: function (dsMenus) { return dsMenus && dsMenus.ITEM_TABELA + " - " + dsMenus.DESCRICAO; },
+        onInitialized: (e) => {
+          App.dx.button(template.find(".btn-edit"), {
+            disabled: true
+          });
+          App.dx.button(template.find(".btn-remove"), {
+            disabled: true
+          });
+        },
+        onValueChanged: (e) => {
+          dados.ITEM_TABELA_MENU_SEL = e.value;
+          if (dados.ITEM_TABELA_MENU_SEL != null) {
+            template.find(".label-perfis-vinculados-menu").fadeIn();
+            App.dx.button(template.find(".btn-edit"), {
+              disabled: false
+            });
+            App.dx.button(template.find(".btn-remove"), {
+              disabled: false
+            });
+            App.dx.tagBox(template.find(".tag-box-perfis-menus-vinculados").fadeIn(), {
+              value: getPerfisMenus(dados),
+            });
+          } else {
+            template.find(".tag-box-perfis-menus-vinculados").fadeOut()
+            template.find(".label-perfis-vinculados-menu").fadeOut();
+            template.find(".btn-save").fadeOut()
+            template.find(".btn-cancel").fadeOut()
+            App.dx.button(template.find(".btn-edit"), {
+              disabled: true
+            });
+            App.dx.button(template.find(".btn-remove"), {
+              disabled: true
+            });
+          }
+        }
+      });
+
+      App.dx.tagBox(template.find(".tag-box-perfis-menus-vinculados"), {
+        items: getPerfis(),
+        showSelectionControls: true,
+        applyValueMode: "useButtons",
+        searchEnabled: true,
+        valueExpr: "ITEM_TABELA",
+        displayExpr: function (dsPerfis) { return (dsPerfis && dsPerfis.ITEM_TABELA + " - " + dsPerfis.DESCRICAO); },
+        onValueChanged: (e) => {
+          dados.ITEM_TABELA_PERFIS_VINC = e.value;
+          if (dados.ITEM_TABELA_PERFIS_VINC.every(item => dsPerfisRel.includes(item)) &&
+            dsPerfisRel.every(item => dados.ITEM_TABELA_PERFIS_VINC.includes(item))) {
+            template.find(".btn-save").fadeOut()
+            template.find(".btn-cancel").fadeOut()
+          } else {
+            template.find(".btn-save").fadeIn()
+            template.find(".btn-cancel").fadeIn()
+          }
+        },
+      });
+
+      App.dx.button(template.find(".btn-add"), {
+        icon: "add",
+        type: "default",
+        onClick: (e) => {
+          var action = "ADICIONAR MENU";
+          var op = "INSERT_MENU";
+          showPopUpGerenciamentoMenusPerfis(action, e, op);
+        },
+      });
+
+      App.dx.button(template.find(".btn-edit"), {
+        icon: "edit",
+        type: "default",
+        onClick: (e) => {
+          var action = "EDITAR MENU";
+          var op = "UPDATE_MENU";
+          getMenuSelecionado(dados)
+          showPopUpGerenciamentoMenusPerfis(action, e, op);
+        },
+      });
+
+      App.dx.button(template.find(".btn-remove"), {
+        icon: "trash",
+        type: "default",
+        onClick: (e) => {
+          var op = "REMOVE_MENU";
+          getMenuSelecionado(dados)
+          dados.ID_TABELA = dsMenuSelecionado.ID_TABELA
+          DevExpress.ui.dialog.confirm("Deseja excluir o menu " + "<b>" + dsMenuSelecionado.ITEM_TABELA + " - " + dsMenuSelecionado.DESCRICAO +
+            "</b>" + "?", "EXCLUIR MENU").done((result) => {
+              if (result) {
+                saveOp(op, dados);
+              }
+            });
+        },
+      });
+
+      App.dx.button(template.find(".btn-save"), {
+        text: "Salvar",
+        icon: "dx-icon dx-icon-check",
+        type: "success",
+        onClick: (e) => {
+          var op = "PERFIS_MENU";
+          template.find(".tag-box-perfis-menus-vinculados").fadeOut()
+          template.find(".label-perfis-vinculados-menu").fadeOut();
+          template.find(".btn-cancel").fadeOut()
+          template.find(".btn-save").fadeOut()
+          saveOp(op, dados)
+        },
+      });
+
+      App.dx.button(template.find(".btn-cancel"), {
+        text: "Cancelar",
+        icon: "close",
+        type: "default",
+        onClick: (e) => {
+          template.find(".btn-cancel").fadeOut();
+          template.find(".btn-save").fadeOut();
+          App.dx.tagBox(template.find(".tag-box-perfis-menus-vinculados"), {
+            value: dsPerfisRel
+          })
+        },
+      });
+    }
+
+    function initPerfis(itemData, itemIndex, itemElement) {
+      var template = App.ui.cloneTo(templateGerenciamentoMenusPerfis, itemElement).show();
+      template.find(".label-perfis-cadastrados").show();
+
+      App.dx.selectBox(template.find(".select-box-menus-perfis-cadastrados"), {
+        width: 10000,
+        items: getPerfis(),
+        searchEnabled: true,
+        valueExpr: "ITEM_TABELA",
+        displayExpr: function (dsPerfis) { return dsPerfis && dsPerfis.ITEM_TABELA + " - " + dsPerfis.DESCRICAO; },
+        onInitialized: (e) => {
+          App.dx.button(template.find(".btn-edit"), {
+            disabled: true
+          });
+          App.dx.button(template.find(".btn-remove"), {
+            disabled: true
+          });
+        },
+        onValueChanged: (e) => {
+          dados.ITEM_TABELA_PERFIL_SEL = e.value;
+          if (dados.ITEM_TABELA_PERFIL_SEL != null) {
+            App.dx.button(template.find(".btn-edit"), {
+              disabled: false
+            });
+            App.dx.button(template.find(".btn-remove"), {
+              disabled: false
+            });
+            App.dx.tagBox(template.find(".tag-box-perfis-menus-vinculados").fadeIn(), {
+              value: getMenusPerfis(dados)
+            });
+            template.find(".label-menus-vinculados-perfil").fadeIn();
+          } else {
+            App.dx.button(template.find(".btn-edit"), {
+              disabled: true
+            });
+            App.dx.button(template.find(".btn-remove"), {
+              disabled: true
+            });
+            template.find(".label-menus-vinculados-perfil").fadeOut()
+            template.find(".tag-box-perfis-menus-vinculados").fadeOut()
+            template.find(".btn-save").fadeOut()
+            template.find(".btn-cancel").fadeOut()
+          }
+        }
+      });
+
+      App.dx.tagBox(template.find(".tag-box-perfis-menus-vinculados").hide(), {
+        items: getMenus(),
+        showSelectionControls: true,
+        applyValueMode: "useButtons",
+        searchEnabled: true,
+        valueExpr: "ITEM_TABELA",
+        displayExpr: function (dsMenus) { return (dsMenus && dsMenus.ITEM_TABELA + " - " + dsMenus.DESCRICAO) },
+        onValueChanged: (e) => {
+          dados.ITEM_TABELA_MENUS_VINC = e.value;
+          if (dsMenusRel.every(item => dados.ITEM_TABELA_MENUS_VINC.includes(item)) &&
+            dados.ITEM_TABELA_MENUS_VINC.every(item => dsMenusRel.includes(item))) {
+            template.find(".btn-save").fadeOut()
+            template.find(".btn-cancel").fadeOut()
+          } else {
+            template.find(".btn-save").fadeIn()
+            template.find(".btn-cancel").fadeIn()
+          }
+        }
+      });
+
+      App.dx.button(template.find(".btn-add"), {
+        icon: "add",
+        type: "default",
+        onClick: (e) => {
+          var action = "ADICIONAR PERFIL";
+          var op = "INSERT_PERFIL";
+          showPopUpGerenciamentoMenusPerfis(action, e, op);
+        },
+      });
+
+      App.dx.button(template.find(".btn-edit"), {
+        disabled: true,
+        icon: "edit",
+        type: "default",
+        onClick: (e) => {
+          var action = "EDITAR PERFIL";
+          var op = "UPDATE_PERFIL";
+          getPerfilSelecionado(dados)
+          showPopUpGerenciamentoMenusPerfis(action, e, op);
+        },
+      });
+
+      App.dx.button(template.find(".btn-remove"), {
+        disabled: true,
+        icon: "trash",
+        type: "default",
+        onClick: (e) => {
+          var op = "REMOVE_PERFIL"
+          getPerfilSelecionado(dados)
+          dados.ID_TABELA = dsPerfilSelecionado.ID_TABELA
+          DevExpress.ui.dialog.confirm("Deseja excluir o perfil " + "<b>" + dsPerfilSelecionado.ITEM_TABELA + " - " + dsPerfilSelecionado.DESCRICAO +
+            "</b>" + "?", "EXCLUIR PERFIL").done((result) => {
+              if (result) {
+                saveOp(op, dados);
+              }
+            });
+        },
+      });
+
+      App.dx.button(template.find(".btn-save"), {
+        text: "Salvar",
+        icon: "dx-icon dx-icon-check",
+        type: "success",
+        onClick: (e) => {
+          var op = "MENUS_PERFIL"
+          template.find(".label-menus-vinculados-perfil").fadeOut()
+          template.find(".tag-box-perfis-menus-vinculados").fadeOut()
+          template.find(".btn-cancel").fadeOut()
+          template.find(".btn-save").fadeOut()
+          saveOp(op, dados)
+        },
+      });
+
+      App.dx.button(template.find(".btn-cancel"), {
+        text: "Cancelar",
+        icon: "close",
+        type: "default",
+        onClick: (e) => {
+          template.find(".btn-save").fadeOut()
+          template.find(".btn-cancel").fadeOut()
+          App.dx.tagBox(template.find(".tag-box-perfis-menus-vinculados"), {
+            value: dsMenusRel
+          })
+        },
+      });
+
+      App.ui.unblockElement();
+    }
+
+    function showPopUpGerenciamentoMenusPerfis(action, element, op) {
+      popup = App.dx.popup($("<div />").appendTo(BPM.dom.form().find(".form")), {
+        title: action,
+        position: "center",
+        closeOnOutsideClick: true,
+        dragEnabled: false,
+        height: "auto",
+        width: 450,
+        contentTemplate: () => {
+          var content = App.ui.cloneTo(templatePopUpGerenciamentoMenusPerfis).show();
+          var menuSelecionado = op == "UPDATE_MENU" ? dsMenuSelecionado.ID_TABELA : null;
+          var perfilSelecionado = op == "UPDATE_PERFIL" ? dsPerfilSelecionado.ID_TABELA : null;
+          dados.ID_TABELA = menuSelecionado || perfilSelecionado
+
+          if (op == "INSERT_MENU" || op == "UPDATE_MENU" || op == "INSERT_PERFIL" || "UPDATE_PERFIL") {
+            //Funções TELA PERFIL
+            content.find(".label-perfil-sup").show()
+            content.find(".label-perfil-ativo").show()
+            content.find(".label-auxchar").show()
+            content.find(".label-menu-sup").hide()
+            content.find(".label-menu-ativo").hide()
+            content.find(".label-sigla").hide()
+            content.find(".label-obs").hide()
+            content.find(".label-icon").hide()
+            content.find(".fontawesome").hide()
+            getMenuPerfilSuperior(op)
+
+            //Valores Menu
+            var itemTabelaMenu = op == "UPDATE_MENU" ? dsMenuSelecionado.ITEM_TABELA : null
+            var descricaoMenu = op == "UPDATE_MENU" ? dsMenuSelecionado.DESCRICAO : null
+            var menuAtivo = op == "UPDATE_MENU" ? dsMenuSelecionado.IND_ATIVO : null
+            var iconeMenu = op == "UPDATE_MENU" ? dsMenuSelecionado.AUX_CHAR : null
+            var auxIntegerMenu = op == "UPDATE_MENU" ? dsMenuSelecionado.AUX_INTEGER : null
+            var menuSuperior = op == "UPDATE_MENU" ? dsMenuPerfilSup.ID_TABELA : null
+            var sigla = op == "UPDATE_MENU" ? dsMenuSelecionado.SIGLA : null
+            var observacao = op == "UPDATE_MENU" ? dsMenuSelecionado.AUX_OBS : null
+            var itemsMenu = op == "UPDATE_MENU" || op == "INSERT_MENU" ? getMenus() : null
+            var funcDEM = function (dsMenus) { return (dsMenus && dsMenus.ITEM_TABELA + " - " + dsMenus.DESCRICAO) }
+            var displayExprMenu = op == "UPDATE_MENU" || op == "INSERT_MENU" ? funcDEM : null
+
+            //Valores Perfil
+            var itemTabelaPerfil = op == "UPDATE_PERFIL" ? dsPerfilSelecionado.ITEM_TABELA : null
+            var descricaoPerfil = op == "UPDATE_PERFIL" ? dsPerfilSelecionado.DESCRICAO : null
+            var perfilAtivo = op == "UPDATE_PERFIL" ? dsPerfilSelecionado.IND_ATIVO : null
+            var auxChar = op == "UPDATE_PERFIL" ? dsPerfilSelecionado.AUX_CHAR : null
+            var auxIntegerPerfil = op == "UPDATE_PERFIL" ? dsPerfilSelecionado.AUX_INTEGER : null
+            var perfilSuperior = op == "UPDATE_PERFIL" ? dsMenuPerfilSup.ID_TABELA : null
+            var itemsPerfil = op == "UPDATE_PERFIL" || op == "INSERT_PERFIL" ? getPerfis() : null
+            var funcDEP = function (dsPerfis) { return (dsPerfis && dsPerfis.ITEM_TABELA + " - " + dsPerfis.DESCRICAO) }
+            var displayExprPerfil = op == "UPDATE_PERFIL" || op == "INSERT_PERFIL" ? funcDEP : null
+
+            App.dx.numberBox(content.find(".number-box-item-tabela"), {
+              placeholder: "ITEM_TABELA",
+              value: itemTabelaMenu || itemTabelaPerfil,
+              onInitialized: () => { dados.ITEM_TABELA = itemTabelaMenu || itemTabelaPerfil },
+              onValueChanged: (e) => { dados.ITEM_TABELA = e.value; },
+            });
+
+            App.dx.textBox(content.find(".text-box-descricao"), {
+              placeholder: "DESCRICAO",
+              value: descricaoMenu || descricaoPerfil,
+              onInitialized: () => { dados.DESCRICAO = descricaoMenu || descricaoPerfil },
+              onValueChanged: (e) => { dados.DESCRICAO = e.value; },
+            })
+
+            App.dx.selectBox(content.find(".select-box-menu-perfil-ativo"), {
+              placeholder: "IND_ATIVO",
+              items: [{
+                valor: "S",
+                descricao: "Sim",
+              }, {
+                valor: "N",
+                descricao: "Não",
+              }],
+              displayExpr: "descricao",
+              valueExpr: "valor",
+              value: menuAtivo || perfilAtivo,
+              onInitialized: () => { dados.IND_ATIVO = menuAtivo || perfilAtivo },
+              onValueChanged: (e) => { dados.IND_ATIVO = e.value; },
+            });
+
+            App.dx.numberBox(content.find(".number-box-aux-integer"), {
+              placeholder: "AUX_INTEGER",
+              value: auxIntegerMenu || auxIntegerPerfil,
+              onInitialized: () => { dados.AUX_INTEGER = auxIntegerMenu || auxIntegerPerfil },
+              onValueChanged: (e) => { dados.AUX_INTEGER = e.value; },
+            });
+
+            App.dx.selectBox(content.find(".select-box-menu-superior"), {
+              items: itemsMenu || itemsPerfil,
+              placeholder: "ID_TABELA_SUP",
+              valueExpr: "ID_TABELA",
+              displayExpr: displayExprMenu || displayExprPerfil,
+              searchEnabled: true,
+              value: menuSuperior || perfilSuperior,
+              onInitialized: () => { dados.ID_TABELA_SUP = menuSuperior || perfilSuperior },
+              onValueChanged: (e) => { dados.ID_TABELA_SUP = e.value; },
+            });
+
+            App.dx.textBox(content.find(".text-box-auxchar"), {
+              placeholder: "AUX_CHAR",
+              width: 500,
+              value: iconeMenu || auxChar,
+              onInitialized: () => { dados.AUX_CHAR = iconeMenu || auxChar },
+              onValueChanged: (e) => { dados.AUX_CHAR = e.value; },
+            });
+          }
+
+          if (op == "INSERT_MENU" || op == "UPDATE_MENU") {
+            content.find(".label-menu-sup").show()
+            content.find(".label-menu-ativo").show()
+            content.find(".label-sigla").show()
+            content.find(".label-obs").show()
+            content.find(".label-icon").show()
+            content.find(".fontawesome").show()
+            content.find(".label-perfil-sup").hide()
+            content.find(".label-perfil-ativo").hide()
+            content.find(".label-auxchar").hide()
+
+            App.dx.textBox(content.find(".text-box-sigla"), {
+              placeholder: "SIGLA",
+              value: sigla,
+              onInitialized: () => { dados.SIGLA = sigla; },
+              onValueChanged: (e) => { dados.SIGLA = e.value; },
+            });
+
+            App.dx.textBox(content.find(".text-box-observacao"), {
+              placeholder: "AUX_OBS",
+              value: observacao,
+              onInitialized: () => { dados.AUX_OBS = observacao; },
+              onValueChanged: (e) => { dados.AUX_OBS = e.value; },
+            });
+          }
+
+          App.dx.button(content.find(".btn-font-awesome"), {
+            icon: "fa-solid fa-font-awesome",
+            type: "default"
+          })
+
+          App.dx.button(content.find(".btn-salvar-popup"), {
+            text: "Salvar",
+            icon: "dx-icon dx-icon-check",
+            type: "success",
+            onClick: (e) => {
+              conditions(op, dados)
+            },
+          });
+
+          App.dx.button(content.find(".btn-cancelar-popup"), {
+            text: "Cancelar",
+            icon: "close",
+            onClick: (e) => {
+              popup.hide();
+            },
+          });
+          return content;
+        },
+      });
+    }
+
+    //Função responsável por pegar os menus.
+    function getMenus() {
+      Repository().get("getMenus", "", (data) => {
+        dsMenus = data;
+      }, () => App.ui.showGenericError(), null, false
+      );
+      return dsMenus;
+    }
+
+    //Função responsável por pegar os perfis.
+    function getPerfis() {
+      Repository().get("getPerfis", "", (data) => {
+        dsPerfis = data;
+      }, () => App.ui.showGenericError(), null, false
+      );
+      return dsPerfis;
+    }
+
+    //Função responsável por pegar os dados do menu selecionado.
+    function getMenuSelecionado(dados) {
+      Repository().get("getMenuSelecionado", [{
+        name: "ITEM_TABELA_JS",
+        value: dados.ITEM_TABELA_MENU_SEL
+      }], (data) => {
+        dsMenuSelecionado = data[0];
+      }, () => App.ui.showGenericError(), null, false
+      );
+      return dsMenuSelecionado;
+    }
+
+    //Função responsável por pegar os dados do perfil selecionado.    
+    function getPerfilSelecionado(dados) {
+      Repository().get("getPerfilSelecionado", [{
+        name: "ITEM_TABELA_JS",
+        value: dados.ITEM_TABELA_PERFIL_SEL
+      }], (data) => {
+        dsPerfilSelecionado = data[0]
+      }, () => App.ui.showGenericError(), null, false
+      );
+      return dsPerfilSelecionado;
+    }
+
+    //Função responsável por puxar o Menu/Perfil Superior.
+    function getMenuPerfilSuperior(op) {
+      Repository().get("getMenuPerfilSuperior", [{
+        name: "ID_TABELA_SUP",
+        value: op == "UPDATE_MENU" ? dsMenuSelecionado.ID_TABELA_SUP : null || op == "UPDATE_PERFIL" ? dsPerfilSelecionado.ID_TABELA_SUP : null
+      }], (data) => {
+        dsMenuPerfilSup = data.length
+        if (data.length == "") {
+          dsMenuPerfilSup = data
+        } else {
+          dsMenuPerfilSup = data[0]
+        }
+      }, () => App.ui.showGenericError(), null, false
+      );
+      return dsMenuPerfilSup;
+    }
+
+    //Função responsável por pegar os perfis relacionados ao menu.
+    function getPerfisMenus(dados) {
+      Repository().get("getPerfisMenus", [{
+        name: "ITEM_TABELA_JS",
+        value: dados.ITEM_TABELA_MENU_SEL
+      }], (data) => {
+        dsPerfisRel = [];
+        data.forEach((obj) => { dsPerfisRel.push(obj.ITEM_TABELA) });
+      }, () => App.ui.showGenericError(), null, false
+      );
+      return dsPerfisRel;
+    }
+
+    //Função responsável por pegar os menus relacionados ao perfil.
+    function getMenusPerfis(dados) {
+      Repository().get("getMenusPerfis", [{
+        name: "ITEM_TABELA_JS",
+        value: dados.ITEM_TABELA_PERFIL_SEL
+      }], (data) => {
+        dsMenusRel = [];
+        data.forEach((obj) => { dsMenusRel.push(obj.ITEM_TABELA) });
+      }, () => App.ui.showGenericError(), null, false
+      );
+      return dsMenusRel;
+    }
+
+    //Função responsável por verificar se o ITEM_TABELA digitado já existe.
+    function getItemTabela(op, dados) {
+      if (op == "INSERT_MENU" || op == "UPDATE_MENU") {
+        Repository().get("getItemTabelaMenu", [{
+          name: "ITEM_TABELA_JS",
+          value: dados.ITEM_TABELA
+        }], (data) => {
+          dsItemTabela = data[0]
+        }, () => App.ui.showGenericError(), null, false
+        );
+      } else {
+        Repository().get("getItemTabelaPerfil", [{
+          name: "ITEM_TABELA_JS",
+          value: dados.ITEM_TABELA
+        }], (data) => {
+          dsItemTabela = data[0]
+        }, () => App.ui.showGenericError(), null, false
+        );
+      }
+      return dsItemTabela
+    }
+
+    function conditions(op, dados) {
+      var errors = []
+      if (dados.ITEM_TABELA || !dados.ITEM_TABELA || !dados.DESCRICAO || !dados.IND_ATIVO) {
+        if (!dados.ITEM_TABELA)
+          errors.push("<b>" + "Item Tabela" + "</b>" + " é obrigatório!");
+
+        if (!dados.DESCRICAO)
+          errors.push("<b>" + "Descrição" + "</b>" + " é obrigatório!");
+
+        if (op == "INSERT_MENU" || op == "UPDATE_MENU") {
+          if (!dados.IND_ATIVO)
+            errors.push("<b>" + "Menu Ativo?" + "</b>" + " é obrigatório!");
+        } else {
+          if (!dados.IND_ATIVO)
+            errors.push("<b>" + "Perfil Ativo?" + "</b>" + " é obrigatório!");
+        }
+
+        if (dados.AUX_CHAR != null) {
+          dados.AUX_CHAR = dados.AUX_CHAR.replace('<i class="', "").replace('"></i>', "");
+        }
+
+        if (!(dados.ITEM_TABELA > 999999999)) {
+          getItemTabela(op, dados)
+          if (op == "INSERT_MENU" || op == "INSERT_PERFIL") {
+            if (dsItemTabela != undefined) errors.push("<b>" + "ITEM_TABELA" + "</b>" + " digitado já existente!")
+          } else if (op == "UPDATE_MENU") {
+            if (dsItemTabela != undefined && dados.ITEM_TABELA != dsMenuSelecionado.ITEM_TABELA) errors.push("<b>" + "ITEM_TABELA" + "</b>" + " digitado já existente!")
+          } else {
+            if (dsItemTabela != undefined && dados.ITEM_TABELA != dsPerfilSelecionado.ITEM_TABELA) errors.push("<b>" + "ITEM_TABELA" + "</b>" + " digitado já existente!")
+          }
+        } else {
+          errors.push("<b>" + "ITEM_TABELA " + "</b>" + "muito grande!")
+        }
+
+        if (dados.AUX_INTEGER > 999999999) errors.push("<b>" + "AUX_INTEGER " + "</b>" + "muito grande!")
+      }
+
+      if (errors.length > 0) {
+        var erro = "<ul>";
+        for (item of errors) {
+          erro = erro + "<li>" + item + "</li>";
+        }
+        erro = erro + "</ul>";
+        App.ui.showWarning(erro);
+      } else {
+        saveOp(op, dados)
+      }
+    }
+
+    //Função responsável por enviar os dados pro LUA.
+    function saveOp(op, dados) {
+      App.service.execute(idVersao, { op: op, json: $.base64.encode(JSON.stringify(dados)) }, ["dados"], true, false, (response) => {
+        App.ui.blockElement();
+        setTimeout(() => { initInterface(op, dados) }, 1000);
+      }, () => App.ui.showGenericError()
+      )
+    }
+
+    //Função responsável por adicionar uma tabPanel e incluir a renderização das informações(grid, botões,...) das telas que estou utilizando.
+    function initInterface(op, dados) {
+      App.dx.tabPanel($("#tabParameters"), {
+        animationEnabled: true,
+        items: [{
+          renderer: initMenus,
+          title: "Menus",
+          icon: "menu",
+        }, {
+          renderer: initPerfis,
+          title: "Perfis",
+          icon: "group",
+        }],
+        itemTemplate: initItemInterface,
+      });
+
+      switch (op) {
+        case "INSERT_MENU":
+          popup.hide()
+          App.ui.showSuccess("Menu adicionado com sucesso!");
+          break;
+
+        case "UPDATE_MENU":
+          popup.hide()
+          App.ui.showSuccess("Menu editado com sucesso!");
+          break;
+
+        case "REMOVE_MENU":
+          App.ui.showSuccess("Menu excluído com sucesso!");
+          break;
+
+        case "PERFIS_MENU":
+          App.ui.showSuccess("Perfis vinculados ao menu atualizados com sucesso!")
+          break
+
+        case "INSERT_PERFIL":
+          popup.hide()
+          App.ui.showSuccess("Perfil adicionado com sucesso!");
+          break;
+
+        case "UPDATE_PERFIL":
+          popup.hide()
+          App.ui.showSuccess("Perfil editado com sucesso!");
+          break
+
+        case "REMOVE_PERFIL":
+          App.ui.showSuccess("Perfil removido com sucesso!");
+          break
+
+        case "MENUS_PERFIL":
+          App.ui.showSuccess("Menus vinculados ao perfil atualizados com sucesso!")
+          break
+      }
+      App.ui.unblockElement();
+    }
+
+    return {
+      init: () => {
+        initInterface();
+      },
+    };
+  })();
+
+  //  Jquery
+  $(function () {
+    setTimeout((_) => instanceUI.init());
+  });
+      //End Jquery
+</script>
+<!--end:script-->
