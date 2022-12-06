@@ -1,0 +1,3135 @@
+<!--begin:style-->
+<style>
+  :root {
+    --main-color: #f4a14e;
+  }
+
+  .p-3 {
+    padding: 3px;
+  }
+
+  .pt-5 {
+    padding-top: 5px;
+  }
+
+  .pb-5 {
+    padding-bottom: 5px;
+  }
+
+  .mt-0 {
+    margin-top: 0;
+  }
+
+  .mtb-0 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .mw-140 {
+    min-width: 140px;
+  }
+
+  .mw-110 {
+    min-width: 110px;
+  }
+
+  .mt-3 {
+    margin-top: 3px;
+  }
+
+  .mb-0 {
+    margin-bottom: 0
+  }
+
+  .mt-5 {
+    margin-top: 5px;
+  }
+
+  .mr-5 {
+    margin-right: 5px;
+  }
+
+  .jc-spacebt {
+    justify-content: space-between;
+  }
+
+  .w-100 {
+    width: 100%;
+  }
+
+  .f-right {
+    float: right;
+  }
+
+  .title-text {
+    color: var(--main-color);
+    font-family: AmsiPro-SemiBold;
+  }
+
+  .btn {
+    font-weight: bold;
+  }
+
+  .d-none-i div.dx-invalid-message-content {
+    display: none !important;
+  }
+
+  .dx-multiview-item-container {
+    background-color: white;
+    padding: 5px;
+  }
+
+  .dx-tabs-wrapper {
+    background-color: #e3e3e3;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .dx-popup-title {
+    font-weight: bold;
+  }
+
+  .msg-success {
+    color: #28a745 !important;
+  }
+
+  .msg-danger {
+    color: #fd0e29 !important;
+  }
+
+  .msg-warning {
+    color: #ffc107 !important;
+  }
+
+  .acoes {
+    background-color: var(--main-color);
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .acao-hr {
+    border: 1px dashed #fff;
+    opacity: 0.5;
+  }
+
+  .acao-item {
+    display: table;
+    vertical-align: middle;
+  }
+
+  .acao-title {
+    color: #fff;
+    display: table-cell;
+    font-family: sans-serif;
+    font-size: 16px;
+    vertical-align: middle;
+    width: 100%;
+    font-weight: bold;
+  }
+
+  .acao-btn {
+    border-color: #333;
+    border-radius: 5px;
+    margin-left: 10px;
+    color: #333;
+    font-family: sans-serif;
+    margin-left: 10px;
+  }
+
+  .tag-grid {
+    text-align: center;
+    display: inline-block;
+  }
+
+  .anexo-obrigatorio {
+    background-color: #fd0e29;
+    border-radius: 45px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    width: fit-content;
+    padding: 2px 5px;
+  }
+
+  .anexo-opcional {
+    background-color: black;
+    border-radius: 45px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    width: fit-content;
+    padding: 2px 5px;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .d-grid-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px 0;
+  }
+
+  .d-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 5px;
+  }
+
+  .d-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 5px;
+  }
+
+  .d-grid-3-mid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 0 5px;
+  }
+
+  .d-grid-popup {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 0 5px;
+  }
+
+  .d-grid-2-left-popup {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0 5px;
+  }
+
+  .d-grid-3-right-popup {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 0 5px;
+  }
+
+  @media (max-width: 660px) {
+    .d-grid-3-right-popup {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px 5px;
+    }
+
+    .box-email-socio {
+      grid-column: 1/4;
+    }
+  }
+
+  @media (max-width: 520px) {
+
+    .d-grid-2-left-popup,
+    .d-grid-3-right-popup,
+    .d-grid-2,
+    .d-grid-3,
+    .d-grid-3-mid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .box-email-socio {
+      grid-column: initial;
+    }
+  }
+</style>
+<!--end:style-->
+<!--begin:dom-->
+
+<!-- Inteface (Inserir telas) -->
+<div id="interface" class="pure-g"></div>
+
+<!-- Tela Minhas Empresas -->
+<div id="tela-minhas-empresas" class="pure-g pure-u-24-24 d-grid-1" style="display: none;">
+  <div>
+    <span class="title-text minhas-empresas" style="display: none">
+      <i class="fa fa-briefcase"></i>
+      EMPRESAS VINCULADAS AO SEU USUÁRIO
+    </span>
+    <span class="title-text gerenciamento-empresas" style="display: none">
+      <i class="fa fa-briefcase"></i>
+      EMPRESAS EM ETAPA DE ANÁLISE
+    </span>
+    <hr class="mt-3 mb-0">
+  </div>
+  <div>
+    <div class="grid-empresas"></div>
+  </div>
+  <div>
+    <div class="btn-adicionar btn f-right"></div>
+  </div>
+</div>
+
+<!-- Template Informar CNPJ -->
+<div id="template-informar-cnpj" class="pure-g pure-u-24-24" style="display: none;">
+  <div class="d-grid-popup">
+    <label class="label">
+      CNPJ
+      <span class="required" style="display: none;">*</span>
+    </label>
+    <br>
+    <div class="cnpj"></div>
+    <div class="btn-avancar"></div>
+  </div>
+</div>
+
+<!-- Tela Empresa -->
+<div id="tela-empresa" class="pure-g pure-u-24-24" style="display: none;">
+  <div class="pb-5">
+    <div class="btn-voltar"></div>
+  </div>
+  <hr class="mt-0">
+  <div class="pb-5">
+    <div class="title-text">
+      Aqui estão disponibilizadas as informações da empresa
+    </div>
+  </div>
+  <div class="pb-5">
+    <div class="tab-panel"></div>
+  </div>
+</div>
+
+<!-- Template Empresa | Dados da Empresa -->
+<div id="template-empresa-dados" class="pure-g pure-u-24-24" style="display: none;">
+  <div class="p-3">
+    <span class="title-text">
+      <i class="fa fa-user"></i>
+      IDENTIFICAÇÃO
+    </span>
+    <hr class="mtb-0">
+  </div>
+  <div class="p-3 d-grid-2">
+    <div>
+      <label class="label">
+        Razão Social
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="razao-social"></div>
+    </div>
+    <div>
+      <label class="label">
+        Nome Fantasia
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="nome-fantasia"></div>
+    </div>
+  </div>
+  <div class="p-3 d-grid-3">
+    <div>
+      <label class="label">
+        CNPJ
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="cnpj"></div>
+    </div>
+    <div>
+      <label class="label">
+        Inscrição Estadual
+      </label>
+      <div class="inscricao-estadual"></div>
+    </div>
+    <div>
+      <label class="label">
+        Data de Abertura
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="data-abertura"></div>
+    </div>
+  </div>
+  <div class="p-3 label-endereco">
+    <span class="title-text">
+      <i class="fa fa-map"></i>
+      ENDEREÇO COMERCIAL
+    </span>
+    <hr class="mtb-0">
+  </div>
+  <div class="p-3 d-grid-3-mid">
+    <div>
+      <label class="label">
+        CEP
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="cep mw-110"></div>
+    </div>
+    <div>
+      <label class="label">
+        Logradouro
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="logradouro"></div>
+    </div>
+    <div>
+      <label class="label">
+        Número
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="numero"></div>
+    </div>
+  </div>
+  <div class="p-3">
+    <label class="label">
+      Complemento
+    </label>
+    <div class="complemento"></div>
+  </div>
+  <div class="p-3 d-grid-3">
+    <div>
+      <label class="label">
+        Bairro
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="bairro"></div>
+    </div>
+    <div>
+      <label class="label">
+        Cidade
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="cidade"></div>
+    </div>
+    <div>
+      <label class="label">
+        Estado
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="estado"></div>
+    </div>
+  </div>
+  <div class="p-3 label-contato">
+    <span class="title-text">
+      <i class="fa fa-phone-square"></i>
+      CONTATO
+    </span>
+    <hr class="mtb-0">
+  </div>
+  <div class="p-3 d-grid-3">
+    <div>
+      <label class="label">
+        Celular
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="celular"></div>
+    </div>
+    <div>
+      <label class="label">
+        Telefone
+        <span class="required" style="display: none;">*</span>
+      </label>
+      <div class="telefone"></div>
+    </div>
+    <div>
+      <label class="label">
+        Telefone de Recado
+      </label>
+      <div class="telefone-recado"></div>
+    </div>
+  </div>
+  <div class="p-3">
+    <label class="label">
+      E-mail
+      <span class="required" style="display: none;">*</span>
+    </label>
+    <div class="e-mail"></div>
+  </div>
+  <div class="p-3 template-grid-anexar" style="display: none;">
+    <div class="p-3 label-documento">
+      <span class="title-text">
+        <i class="fa fa-paperclip"></i>
+        DOCUMENTOS
+      </span>
+      <hr class="mtb-0">
+    </div>
+    <div class="grid-anexar"></div>
+  </div>
+</div>
+
+<!-- Template Grid Anexar | Anexo Obrigatório -->
+<div id="template-grid-anexar-anexo-obrigatorio" class="tag-grid" style="display: none;">
+  <div class="anexo-obrigatorio">
+    Obrigatório
+  </div>
+</div>
+
+<!-- Template Grid Anexar | Anexo Opcional -->
+<div id="template-grid-anexar-anexo-opcional" class="tag-grid" style="display: none;">
+  <div class="anexo-opcional">
+    Opcional
+  </div>
+</div>
+
+<!-- Template Empresa | Sócios -->
+<div id="template-empresa-socios" class="pure-g pure-u-24-24" style="display: none;">
+  <div>
+    <div class="grid-socios"></div>
+  </div>
+  <div class="pt-5 f-right btn-socio">
+    <div class="btn-add-socio btn"></div>
+  </div>
+</div>
+
+<!-- Template Empresa | Sócios | Pop-Up Adicionar sócio -->
+<div id="template-adicionar-socio" class="pure-g pure-u-24-24" style="display: none;">
+  <div class="p-3">
+    <span class="title-text">
+      <i class="fa fa-user"></i>
+      IDENTIFICAÇÃO
+    </span>
+    <hr class="mtb-0">
+  </div>
+  <div class="p-3 d-grid-2-left-popup">
+    <div>
+      <label class="label">
+        Nome
+      </label>
+      <div class="nome-socio"></div>
+    </div>
+    <div>
+      <label class="label">
+        CPF
+        <span class="required" style="display: none">*</span>
+      </label>
+      <div class="cpf-socio mw-140"></div>
+    </div>
+  </div>
+  <div class="p-3 label-contato">
+    <span class="title-text">
+      <i class="fa fa-phone-square"></i>
+      CONTATO
+    </span>
+    <hr class="mtb-0">
+  </div>
+  <div class="p-3 d-grid-3-right-popup">
+    <div>
+      <label class="label">
+        Celular
+        <span class="required" style="display: none">*</span>
+      </label>
+      <div class="celular-socio"></div>
+    </div>
+    <div>
+      <label class="label">
+        Telefone
+      </label>
+      <div class="telefone-socio"></div>
+    </div>
+    <div class="box-email-socio">
+      <label class="label">
+        Email
+        <span class="required" style="display: none">*</span>
+      </label>
+      <div class="email-socio"></div>
+    </div>
+  </div>
+  <div class="d-flex pt-5 jc-spacebt">
+    <div class="btn-cancelar"></div>
+    <div class="btn-avancar"></div>
+  </div>
+</div>
+
+<!-- Template Empresa | Documentos -->
+<div id="template-empresa-documentos" class="pure-g" style="display: none;">
+  <div class="pure-u-24-24">
+    <div class="grid-documentos"></div>
+  </div>
+</div>
+
+<!-- Template Empresa | Histórico -->
+<div id="template-empresa-historico" class="pure-g" style="display: none;">
+  <div class="pure-u-24-24">
+    <div class="grid-historico"></div>
+  </div>
+</div>
+
+<!-- Template Empresa | Histórico | Despacho -->
+<div id="template-empresa-historico-despacho" style="display: none;">
+  <div class="pure-u-24-24">
+    <div class="html-editor-despacho"></div>
+  </div>
+  <div class="pure-u-24-24">
+    <div class="f-right">
+      <div class="btn-fechar btn"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Template Confirmação Email -->
+<div id="template-confirmacao-email" class="pure-g pure-u-24-24" style="display: none;">
+  <div class="title-text">
+    Prezado Cidadão, acesse o seu e-mail digite no campo abaixo o código que foi enviado. Caso o e-mail enviado
+    pela Prefeitura não esteja na sua "Caixa de Entrada", então verifique se ele está classificado como "Spam".
+    Você pode tentar enviar novamente voltando no passo anterior.
+  </div>
+  <div class="d-grid-popup pt-5">
+    <label class="label w-100">
+      Código de Confirmação
+      <span class="required" style="display: none;">*</span>
+    </label>
+    <br>
+    <div class="codigo"></div>
+    <div class="btn-ok btn"></div>
+  </div>
+</div>
+
+<!-- Template Popup Despacho -->
+<div id="template-popup-despacho" class="pure-g pure-u-24-24" style="display: none;">
+  <div>
+    <label class="label">
+      Despacho
+      <span class="required" style="display: none">*</span>
+    </label>
+    <div class="despacho"></div>
+  </div>
+  <div class="grid-documentos mt-5"></div>
+  <div class="d-flex pt-5 jc-spacebt">
+    <div class="btn-cancelar"></div>
+    <div class="btn-avancar"></div>
+  </div>
+</div>
+
+<!-- Template Ações -->
+<div id="template-acoes" class="acoes pure-u-24-24" style="display: none;"></div>
+
+<!-- Template Ação Item -->
+<div id="template-acao-item" class="acao-item d-flex" style="display: none;">
+  <div class="w-100">
+    <span class="acao-title"></span>
+  </div>
+  <div class="btn acao-btn"></div>
+</div>
+
+<!--end:dom-->
+
+<!--begin:script-->
+<script>
+
+  // var instanceUI = function () {
+  var MemoriaInstancia = null;
+  var Dados = {
+    Instancia: {
+      IdVersao: parseInt($("#versao").val()),
+      IdInstancia: parseInt($("#instancia").val())
+    },
+    Ctrl: {}
+  };
+  var Ativ = null
+  var Empresa = {};
+  var IdMenuAtual = 0;
+
+  var Interface = {
+    Container: $("#interface"),
+    Telas: {
+      MinhasEmpresas: {
+        Init: initTelaMinhasEmpresas,
+        Refresh: refreshTelaMinhasEmpresas,
+        Enable: enableTelaMinhasEmpresas,
+        Limpar: limparTelaMinhasEmpresas,
+        Templates: {
+          Tela: $("#tela-minhas-empresas")
+        },
+        Instances: {}
+      },
+      InformarCNPJ: {
+        Init: initPopupInformarCNPJ,
+        Limpar: limparPopupInformarCNPJ,
+        Templates: {
+          Template: $("#template-informar-cnpj")
+        },
+        Instances: {}
+      },
+      Empresa: {
+        Titulo: "VISUALIZAR EMPRESA",
+        Init: initTelaEmpresa,
+        Refresh: refreshTelaEmpresa,
+        Limpar: limparTelaEmpresa,
+        Templates: {
+          Tela: $("#tela-empresa"),
+          DadosEmpresa: $("#template-empresa-dados"),
+          Socios: $("#template-empresa-socios"),
+          AnexoObrigatorio: $("#template-grid-anexar-anexo-obrigatorio"),
+          AnexoOpcional: $("#template-grid-anexar-anexo-opcional"),
+          Documentos: $("#template-empresa-documentos"),
+          Historico: {
+            Template: $("#template-empresa-historico"),
+            Despacho: $("#template-empresa-historico-despacho")
+          },
+        },
+        Instances: {}
+      },
+      AdicionarSocio: {
+        Init: initPopupAdicionarSocio,
+        Limpar: limparPopupAdicionarSocio,
+        Templates: {
+          Template: $("#template-adicionar-socio")
+        },
+        Instances: {}
+      },
+      ConfirmacaoEmail: {
+        Init: initPopupConfirmacaoEmail,
+        Limpar: limparPopupConfirmacaoEmail,
+        Templates: {
+          Template: $("#template-confirmacao-email")
+        },
+        Instances: {}
+      },
+      Despacho: {
+        Init: initPopupDespacho,
+        Limpar: limparPopupDespacho,
+        Templates: {
+          Template: $("#template-popup-despacho")
+        },
+        Instances: {}
+      },
+      Acoes: {
+        Templates: {
+          Template: $("#template-acoes"),
+          Acao: $("#template-acao-item")
+        },
+        Instances: {}
+      }
+    }
+  };
+
+  function initDados() {
+    App.ui.blockElement();
+
+    Repository().getMultiple([{
+      name: "getVariavelMemoria",
+      args: [{
+        name: "ID_INSTANCIA",
+        value: Dados.Instancia.IdInstancia
+      }]
+    }, {
+      name: "getSituacoesEmpresa"
+    }, {
+      name: "getTiposDocumentos"
+    }], (response) => {
+      try {
+        Dados.Instancia.IdInstVarMemoria = response["getVariavelMemoria"].data[0].ID_INSTANCIA_VAR;
+        Dados.Instancia.IdVariavelMemoria = response["getVariavelMemoria"].data[0].ID_VARIAVEL;
+
+        Dados.SituacoesEmpresa = response["getSituacoesEmpresa"].data;
+        Dados.TiposDocumentos = response["getTiposDocumentos"].data;
+
+        App.service.luaToJson(Dados.Instancia.IdInstVarMemoria, null, (obj) => { MemoriaInstancia = obj });
+
+        var login = MemoriaInstancia.Login || {};
+        Dados.Ctrl = {
+          IdCtrl: login.IdCtrl || 0,
+          IdPessoa: login.IdPessoa || 0,
+          CPF: login.CPF || '',
+          Email: login.EMail || '',
+          Nome: login.Nome || ''
+        }
+
+        IdMenuAtual = MemoriaInstancia.Navegacao.MenuIdAtual
+
+        if (MemoriaInstancia.IdCtrlAtividade) {
+          checkPermissao({ IdAtiv: MemoriaInstancia.IdCtrlAtividade }, initAtividade, () => {
+            App.ui.showAndSaveError("Você não possui permissão para acessar essa atividade!");
+            setOperador("SAIR");
+          });
+        } else if (MemoriaInstancia.Navegacao && IdMenuAtual == 501) {
+          Interface.Telas.MinhasEmpresas.Titulo = "MINHAS EMPRESAS"
+          trocaTela(Interface.Telas.MinhasEmpresas)
+        } else if (MemoriaInstancia.Navegacao && IdMenuAtual == 502) {
+          Interface.Telas.MinhasEmpresas.Titulo = "GERENCIAMENTO DE EMPRESAS"
+          trocaTela(Interface.Telas.MinhasEmpresas)
+        } else {
+          App.ui.showAndSaveError("Forma de inicialização inválida!");
+          setOperador("SAIR");
+        }
+        App.ui.unblockElement();
+      } catch (e) {
+        App.ui.showAndSaveError(e);
+        setOperador("SAIR");
+      }
+    });
+  }
+
+  function initAtividade(obj) {
+    if (obj.IdAtiv && obj.IdEmpresa) {
+      Repository().getMultiple([{
+        name: "getAtividade",
+        args: [{
+          name: "ID_CTRL_ATIVIDADE",
+          value: obj.IdAtiv
+        }]
+      }, {
+        name: "getEmpresa",
+        args: [{
+          name: "ID_EMPRESA_PER",
+          value: obj.IdEmpresa
+        }]
+      }, {
+        name: "getDocumentos",
+        args: [{
+          name: "ID_EMPRESA_PER",
+          value: obj.IdEmpresa
+        }]
+      }, {
+        name: "getAnexar",
+        args: [{
+          name: "ID_CTRL_ATIVIDADE",
+          value: obj.IdAtiv
+        }]
+      }], (response) => {
+        try {
+          Dados.IdAtiv = obj.IdAtiv;
+          Dados.IdEmpresa = obj.IdEmpresa;
+
+          if (response["getAtividade"] && response["getAtividade"].data && response["getAtividade"].data.length > 0) Ativ = response["getAtividade"].data[0];
+          if (response["getEmpresa"] && response["getEmpresa"].data && response["getEmpresa"].data.length > 0) Empresa = response["getEmpresa"].data[0];
+          if (response["getDocumentos"] && response["getDocumentos"].data && response["getDocumentos"].data.length > 0) Empresa.Documentos = response["getDocumentos"].data;
+          if (response["getAnexar"] && response["getAnexar"].data && response["getAnexar"].data.length > 0) Ativ.Anexar = response["getAnexar"].data;
+
+          if (Ativ.ETAPA_ITEM == 2002) {
+            /* Correção de Dados da Empresa */
+            var json = { action: "Correção do cadastro" }
+            json.DESPACHO = Ativ.DESPACHO
+            initPopupDespacho(json)
+          } else {
+            trocaTela(Interface.Telas.Empresa, false, getTituloAtividade());
+            getAcoesEtapa();
+          }
+
+          App.ui.unblockElement();
+        } catch (e) {
+          App.ui.showAndSaveError(e, "Erro ao carregar a atividade");
+          setOperador("SAIR");
+        }
+      });
+    } else if (obj.IdEmpresa) {
+      Repository().getMultiple([{
+        name: "getEmpresa",
+        args: [{
+          name: "ID_EMPRESA_PER",
+          value: obj.IdEmpresa
+        }]
+      }, {
+        name: "getDocumentos",
+        args: [{
+          name: "ID_EMPRESA_PER",
+          value: obj.IdEmpresa
+        }]
+      }], (response) => {
+        try {
+          Ativ = null
+          Dados.IdEmpresa = obj.IdEmpresa;
+          Empresa = response["getEmpresa"].data[0];
+
+          if (response["getDocumentos"] && response["getDocumentos"].data && response["getDocumentos"].data.length > 0) Empresa.Documentos = response["getDocumentos"].data
+
+          trocaTela(Interface.Telas.Empresa, false);
+          App.ui.unblockElement();
+        } catch (e) {
+          App.ui.showAndSaveError(e, "Erro ao carregar a empresa");
+          setOperador("SAIR");
+        }
+      });
+    } else if (done) {
+      done()
+    } else {
+      App.ui.showAndSaveError("Erro ao carregar os dados!")
+      setOperador("SAIR");
+    }
+  }
+
+  function getTituloAtividade() {
+    if (Ativ) {
+      if (Ativ.ETAPA_ITEM == 2000) return "INFORMAR DADOS DA EMPRESA";
+    }
+  }
+
+  function getAcoesEtapa() {
+    if (Ativ) {
+      if (Ativ.ETAPA_ITEM == 2000 || Ativ.ETAPA_ITEM == 2002 || Ativ.ETAPA_ITEM == 2003) {
+        //Preenchimento ou Correção ou Alterar Dados da Empresa
+        initAcoes([{
+          Descricao: "Confirmar dados da empresa e sócios e prosseguir com a solicitação",
+          Botao: "Avançar",
+          Func: avancarSalvarCancelarDadosEmpresa
+        }, {
+          Descricao: "O sistema irá salvar a solicitação e ela poderá ser retomada posteriormente",
+          Botao: "Salvar",
+          Func: avancarSalvarCancelarDadosEmpresa
+        }, {
+          Descricao: "Cancelar cadastro da empresa",
+          Botao: "Cancelar",
+          Func: avancarSalvarCancelarDadosEmpresa
+        }]);
+      } else if (Ativ.ETAPA_ITEM == 2001) {
+        //Análise da Empresa
+        initAcoes([{
+          Descricao: "Deferir a solicitação",
+          Botao: "Deferir",
+          Func: deferirCorrecaoIndeferirAnalise
+        }, {
+          Descricao: "Retomar a solicitação para correção do solicitante",
+          Botao: "Correção",
+          Func: deferirCorrecaoIndeferirAnalise
+        }, {
+          Descricao: "Indeferir a solicitação",
+          Botao: "Indeferir",
+          Func: deferirCorrecaoIndeferirAnalise
+        }]);
+      } else {
+        App.ui.showError("Erro ao carregar as ações da etapa!");
+        setOperador("SAIR");
+      }
+    }
+  }
+
+  function getCodigoReposiory() {
+    return 152318424;
+  }
+
+  function Repository() {
+    return $.BPMAction(getCodigoReposiory()).data("source");
+  }
+
+  function setOperador(op, required) {
+    if (!required) {
+      BPM.actions.unrequired();
+    }
+    $operador.val(op);
+    $btnNext.trigger("click");
+  }
+
+  function checkPermissao(obj, done, fail) {
+    Dados.IdEmpresa = null;
+    Dados.IdResponsavel = null;
+    Dados.IdAtiv = null;
+    Empresa = null;
+
+    if (obj.IdAtiv) {
+      Repository().get("checkPermissaoAtiv", [{
+        name: "ID_CTRL_ATIVIDADE",
+        value: obj.IdAtiv
+      }, {
+        name: "ID_CTRL_EXCLUSIVO",
+        value: Dados.Ctrl.IdCtrl
+      }], (data) => {
+        if (data && data.length > 0 && data[0].PERMISSAO == 1) {
+          if (typeof done == "function") {
+            Dados.IdAtiv = obj.IdAtiv;
+            Dados.IdEmpresa = obj.IdEmpresa;
+            done();
+          }
+        } else if (typeof fail == "function") {
+          fail();
+        }
+      });
+    } else if (obj.IdEmpresa) {
+      Repository().get("checkPermissaoEmpresa", [{
+        name: "ID_EMPRESA_PER",
+        value: obj.IdEmpresa
+      }, {
+        name: "ID_CTRL_EXCLUSIVO",
+        value: Dados.Ctrl.IdCtrl
+      }], (data) => {
+        if (data && data.length > 0 && data[0].PERMISSAO == 1) {
+          if (typeof done == "function") {
+            Dados.IdEmpresa = obj.IdEmpresa;
+            done();
+          }
+        } else if (typeof fail == "function") {
+          fail();
+        }
+      });
+    } else if (obj.MenuIdAtual) {
+      Repository().get("checkPermissaoMenu", [{
+        name: "MENU",
+        value: obj.MenuIdAtual
+      }, {
+        name: "ID_CTRL_EXCLUSIVO",
+        value: Dados.Ctrl.IdCtrl
+      }], (data) => {
+        if (data && data.length > 0 && data[0].PERMISSAO == 1) {
+          if (typeof done == "function") {
+            Dados.MenuIdAtual = obj.MenuIdAtual;
+            done();
+          }
+        } else if (typeof fail == "function") {
+          fail();
+        }
+      });
+    } else {
+      App.ui.showAndSaveError("Tipo de Permissão não identificado!");
+      if (typeof fail == "function") {
+        fail();
+      }
+    }
+  }
+
+  function trataResponse(dados) {
+    if (typeof dados == "string") {
+      App.service.luaToJson(dados, null,
+        (obj) => {//done
+          dados = obj;
+        },
+        () => App.ui.showGenericError());
+    }
+    return dados;
+  }
+
+  function checkErrorBase64(str, ignorePopup) {
+    var error = false;
+    var posError = 0;
+    try {
+      $.base64.encode(str);
+    } catch (e) {
+      error = true;
+    }
+    if (error) {
+      for (var i = 0; i < str.length; i++) {
+        try {
+          $.base64.encode(str.charAt(i));
+        } catch (e) {
+          if (!ignorePopup) {
+            posError = i;
+            var ini = posError - 10;
+            var tamIni = ini < 0 ? 10 + ini : 10;
+            ini = ini < 0 ? 0 : ini;
+            App.ui.showError(
+              "Caracter Inválido: <b>" + str.charAt(posError) + "</b><br><br>" +
+              'Trecho: "' + (ini > 0 ? "..." : "") + str.substr(ini, tamIni) +
+              "<b>" + str.charAt(posError) + "</b></u>" + str.substr(posError + 1, 10) +
+              (posError + 11 > str.length ? "" : "...") + '"');
+          }
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  function initAcoes(listaAcoes) {
+    Interface.Container.find(".acoes").remove();
+    if (listaAcoes && listaAcoes.length > 0) {
+      var template = App.ui.cloneTo(Interface.Telas.Acoes.Templates.Template, Interface.Container).show();
+      listaAcoes.map((v, i) => {
+        if (i > 0) {
+          template.append("<hr class='acao-hr'/>");
+        }
+
+        var acao = App.ui.cloneTo(Interface.Telas.Acoes.Templates.Acao, template).show();
+        acao.find(".acao-title").html(v.Descricao);
+
+        App.dx.button(acao.find(".acao-btn"), {
+          text: v.Botao,
+          onClick: () => v.Func(v)
+        });
+      });
+    }
+  }
+
+  function trocaTela(tela, ignoreRefresh, titulo) {
+    Interface.Container.children().detach();
+    Interface.TelaAtual = tela;
+
+    if (titulo || tela.Titulo) {
+      App.setTitle(titulo || tela.Titulo);
+    }
+
+    if (!tela.Element) {
+      tela.Element = tela.Init();
+    }
+
+    if (tela.Enable) {
+      tela.Enable();
+    }
+    Interface.Container.append(tela.Element);
+    if (tela.Refresh && !ignoreRefresh) {
+      tela.Refresh();
+    }
+  }
+
+  function downloadAnexo(data) {
+    var nameQr = "";
+    var params = [];
+
+    if (data.ID_CTRL_ANEXO) {
+      nameQr = "downloadCtrlAnexo";
+      params.push({
+        name: "ID_CTRL_ANEXO",
+        value: data.ID_CTRL_ANEXO
+      });
+    }
+
+    Repository().download(nameQr, params);
+  }
+
+  function allowPreview(name) {
+    var ext = name.split(".").pop();
+
+    return $.inArray(ext, ["pdf", "png", "jpeg", "jpg"]) >= 0;
+  }
+
+  function showAnexo(data) {
+    var img = data.NOME_ANEXO.split(".").pop() != "pdf";
+    var container = $("<div style='height: 100%'/>");
+    var iframe = null;
+
+    Interface.Telas.Empresa.Instances.PopupAnexo = App.dx.popup($("<div />").appendTo(BPM.dom.form().find(".form")), {
+      contentTemplate: () => container,
+      onHidden: () => iframe.remove(),
+      resizeEnabled: img,
+      title: "Visualizar Arquivo",
+      onShown: () => {
+        var height = (parseInt(Interface.Telas.Empresa.Instances.PopupAnexo.option("height")()) - 50) + "px";
+        iframe = $("<iframe/>", {
+          "css": { "width": "100%", "height": height },
+          "src": App.buildFrameURL(MemoriaInstancia.Login.CPF, MemoriaInstancia.Login.SenhaCriptografada) +
+            "&formId=" + $.base64.encode("Visualizador de Documentos") +
+            "&memoriaInstancia=" + $.base64.encode("IdCtrlAnexo=" + (data.ID_CTRL_ANEXO) + (img ? ";IsImg=1" : ""))
+        }).appendTo(container);
+        setTimeout(function () {
+          iframe.css("height", "100%")
+        });
+      }
+    });
+  }
+
+  function uploadAnexo(data, func) {
+    var nameQr = "";
+    var params = [];
+
+    if (data.ID_CTRL_ANEXO) {
+      nameQr = "updateCtrlAnexo";
+
+      params.push({
+        name: "ID_CTRL_ANEXO",
+        value: data.ID_CTRL_ANEXO
+      });
+    }
+
+    Repository().upload(nameQr, (file) => {
+      var nome = file.name.split("_").join("-").split("."),
+        ext = nome.pop();
+
+      params.push({
+        name: "NOME_ANEXO",
+        value: nome.join(".")
+      }, {
+        name: "EXTENSAO_ANEXO",
+        value: ext
+      });
+
+      return params;
+    }, null, null, (_, status) => {
+      if (status == "nocontent") {
+        App.ui.showInfo("O arquivo selecionado está vazio!")
+      } else if (status == "success") {
+        App.ui.showSuccess("Upload realizado!");
+        func();
+      }
+    }, () => App.ui.showGenericError());
+  }
+
+  function deleteAnexo(data, func) {
+    var nameQr = "";
+    var params = [];
+
+    if (data.ID_CTRL_ANEXO) {
+      Repository().post("deleteCtrlAnexo", [{
+        name: "ID_CTRL_ANEXO",
+        value: data.ID_CTRL_ANEXO
+      }], () => {
+        App.ui.showSuccess("Arquivo removido com sucesso!");
+        func();
+      }, () => App.ui.showGenericError());
+    }
+  }
+
+  function downloadActionCell(data, func) {
+    var actions = [{
+      name: "Baixar",
+      icon: "fa fa-download",
+      func: () => {
+        downloadAnexo(data);
+        if (typeof func == "function") {
+          func();
+        }
+      }
+    }];
+
+    if (allowPreview(data.NOME_ANEXO)) {
+      actions.unshift({
+        name: "Visualizar",
+        icon: "fa fa-eye",
+        func: () => {
+          showAnexo(data);
+          if (typeof func == "function") {
+            func();
+          }
+        }
+      });
+    }
+    return customActionCell({ actions: actions });
+  }
+
+  function uploadActionCell(data, func) {
+    var actions = [];
+
+    if (data.DT_ALTERACAO) {
+      actions = [{
+        name: "Baixar",
+        icon: "fa fa-download",
+        func: () => downloadAnexo(data)
+      }, {
+        name: "Visualizar",
+        icon: "fa fa-eye",
+        func: () => showAnexo(data, func)
+      }];
+    } else if (data.NOME_ANEXO) {
+      actions = [{
+        name: "Baixar",
+        icon: "fa fa-download",
+        func: () => downloadAnexo(data)
+      }, {
+        name: "Remover",
+        icon: "close",
+        func: () => deleteAnexo(data, func)
+      }, {
+        name: "Substituir",
+        icon: "fa fa-upload",
+        func: () => uploadAnexo(data, func)
+      }];
+    } else {
+      actions = [{
+        name: "Enviar",
+        icon: "fa fa-paperclip",
+        func: () => uploadAnexo(data, func)
+      }]
+    }
+
+    return customActionCell({ actions: actions });
+  }
+
+  function customPopup(opts) {
+    var inst = $("<div />").appendTo(BPM.dom.form().find(".form")).dxPopup($.extend(true, {
+      height: "",
+      maxHeight: window.innerHeight - 50,
+      minWidth: 200,
+      resizeEnabled: true,
+      showCloseButton: true,
+      visible: true
+    }, opts)).dxPopup("instance");
+
+    inst.Refresh = () => {
+      if (inst.option("height") == "") {
+        inst.option("height", null);
+      } else {
+        inst.option("height", "");
+      }
+    }
+
+    return inst;
+  }
+
+  function customActionCell(opts) {
+    var div = $("<div class='btn' />");
+    opts = opts || {};
+
+    if (opts.actions.length == 1 && !opts.forceDropDown && !opts.disabled) {
+      App.dx.button(div, {
+        icon: opts.actions[0].icon,
+        hint: opts.actions[0].name,
+        text: opts.showText ? opts.actions[0].name : null,
+        onClick: () => opts.actions[0].func(),
+        disabled: opts.actions[0].disabled || false,
+        width: opts.width || 40
+      });
+    } else if (opts.actions.length == 1 && opts.disabled) {
+      App.dx.button(div, {
+        icon: opts.actions[0].icon,
+        hint: opts.actions[0].name,
+        text: opts.showText ? opts.actions[0].name : null,
+        onClick: () => opts.actions[0].func(),
+        disabled: true,
+        width: opts.width || 40
+      });
+    } else {
+      App.dx.dropDownButton(div, {
+        displayExpr: "name",
+        dataSource: opts.actions,
+        disabled: opts.actions.length == 0,
+        dropDownOptions: {
+          width: opts.dropDownWidth || 150
+        },
+        icon: "fa fa-cog",
+        onItemClick: (e) => e.itemData.func(),
+        showArrowIcon: false,
+        width: 40
+      });
+    }
+
+    return div;
+  }
+
+  function enableComponent(inst, opts) {
+    if (!inst) {
+      return;
+    }
+    opts = opts || {};
+
+    if (opts.disabled) {
+      inst.option("disabled", false);
+    } else {
+      inst.option("readOnly", false);
+    }
+
+    var validator = inst.Validator || App.dx.validator(inst.element(), {
+      elementAttr: {
+        class: "d-none-i"
+      }
+    });
+
+    if (opts.required) {
+      if (inst.element().parent().find(".required")) {
+        inst.element().parent().find(".required").show();
+      }
+
+      if (typeof opts.required != "string" || opts.required != "labelOnly") {
+        var rules = [{
+          type: "required",
+          message: "Campo Obrigatório"
+        }];
+
+        if (opts.notZero) {
+          rules.push({
+            type: "range",
+            min: 1,
+            message: "Valor deve ser maior que 0"
+          });
+        }
+
+        if (opts.checkText) {
+          rules.push({
+            type: "custom",
+            reevaluate: true,
+            validationCallback: function (e) {
+              return !checkErrorBase64(e.value);
+            },
+            message: "Caracter Inválido"
+          });
+        }
+
+        if (opts.cpfcnpj) {
+          rules.push({
+            type: "custom",
+            reevaluate: true,
+            validationCallback: function (e) {
+              return App.data.isCpfValido(e.value) || App.data.isCnpjValido(e.value)
+            },
+            message: "Documento Inválido"
+          });
+        }
+
+        if (opts.cnpj) {
+          rules.push({
+            type: "custom",
+            reevaluate: true,
+            validationCallback: function (e) {
+              getEmpresaAdd(e.value)
+              if (!dsEmpresaAdd) {
+                return App.data.isCnpjValido(e.value)
+              }
+            },
+            message: ["O CNPJ informado já foi cadastrado por outro usuário.",
+              "O CNPJ informado já está em análise. Você será notificado assim que a situação do mesmo for alterada.",
+              "O CNPJ já está vinculado ao seu usuário. Para prosseguir, selecione o mesmo no grid Minhas Empresas."]
+          });
+        }
+
+        if (opts.cpf) {
+          rules.push({
+            type: "custom",
+            reevaluate: true,
+            validationCallback: function (e) {
+              getSocio(e.value)
+              if (!dsSocio) {
+                return App.data.isCpfValido(e.value)
+              }
+            },
+            message: "O CPF informado já está associado à empresa."
+          });
+        }
+
+        if (opts.data) {
+          rules.push({
+            type: "custom",
+            reevaluate: true,
+            validationCallback: function (e) {
+              dataEscolhida = App.data.formatDate(Interface.Telas.Empresa.Instances.DtAbertura.option("value"))
+              dataAtual = App.data.formatDate(new Date())
+              if (dataEscolhida >= dataAtual) {
+                return App.data.formatDate(e.value)
+              }
+            },
+            message: "A data escolhida não pode ser anterior à atual."
+          });
+        }
+
+        if (opts.email) {
+          rules.push({
+            type: "custom",
+            reevaluate: true,
+            validationCallback: function (e) {
+              return App.data.isValidEmail(e.value);
+            },
+            message: "Email Inválido"
+          });
+        }
+
+        validator.option("validationRules", rules);
+      }
+    } else if (opts.checkText) {
+      validator.option("validationRules", [{
+        type: "custom",
+        reevaluate: true,
+        validationCallback: function (e) {
+          return !checkErrorBase64(e.value);
+        },
+        message: "Caractere Inválido"
+      }]);
+    } else {//Add Check Column
+      validator.option("validationRules", []);
+    }
+
+    if (validator) {
+      inst.Validator = validator;
+      inst.Validate = (valid) => {
+        if (typeof opts.required == "function" && !opts.required()) {
+          return valid;
+        } else {
+          var validation = validator.validate()
+          var v = validation.isValid;
+
+          if (valid && !v) {
+            if (opts.parent && opts.index) {
+              opts.parent.option("selectedIndex", opts.index);
+            }
+            if (opts.parent) {
+              opts.parent.focus();
+            }
+            inst.focus();
+            var name = opts.name ? opts.name : null;
+            if (inst.element().parent().find("label")) {
+              name = inst.element().parent().find("label").text();
+            }
+            if (opts.cnpj) {
+              getEmpresaAdd(Interface.Telas.InformarCNPJ.Instances.CNPJ.option("value"))
+              if (dsEmpresaAdd) {
+                if (dsEmpresaAdd.ID_PESSOA_RESP != Dados.Ctrl.IdPessoa) App.ui.showWarning(validation.brokenRules[0].message[0], name);
+                else if (dsEmpresaAdd.SITUACAO_ITEM == 2) App.ui.showWarning(validation.brokenRules[0].message[1], name);
+                else App.ui.showWarning(validation.brokenRules[0].message[2], name);
+              } else {
+                App.ui.showWarning(validation.brokenRules[0].message, name);
+              }
+            } else {
+              App.ui.showWarning(validation.brokenRules[0].message, name);
+            }
+          }
+          return valid && v;
+        }
+      }
+    } else {
+      inst.Validate = (valid) => valid;
+    }
+
+  }
+
+  function validateAll(inst) {
+    var valid = true;
+    Object.keys(inst).map((key) => {
+      if (inst[key].Validate) {
+        valid = inst[key].Validate(valid);
+      }
+    });
+    return valid;
+  }
+
+  function initPopupInformarCNPJ(done) {
+    Interface.Telas.InformarCNPJ.Instances.Popup = customPopup({
+      title: "Informar CNPJ",
+      contentTemplate: () => {
+        var template = App.ui.cloneTo(Interface.Telas.InformarCNPJ.Templates.Template).show();
+
+        Interface.Telas.InformarCNPJ.Instances.CNPJ = App.dx.textBox(template.find(".cnpj"), {
+          mask: "00.000.000/0000-00",
+        });
+        enableComponent(Interface.Telas.InformarCNPJ.Instances.CNPJ, { required: true, mask: true, cpfcnpj: true, cnpj: true });
+
+        Interface.Telas.InformarCNPJ.Instances.BtnAvancar = App.dx.button(template.find(".btn-avancar"), {
+          text: "Avançar",
+          icon: "fa fa-check",
+          onClick: (e) => {
+            var valid = Interface.Telas.InformarCNPJ.Instances.CNPJ.Validate(true);
+            if (valid) {
+              e.component.done(Interface.Telas.InformarCNPJ.Instances.CNPJ.option("value"));
+            }
+          }
+        });
+
+        return template;
+      },
+      onHidden: Interface.Telas.InformarCNPJ.Limpar,
+      onShown: (e) => {
+        if (typeof done == "function") {
+          done();
+          e.component.option("onShown", null);
+        }
+      }
+    });
+  }
+
+  function getEmpresaAdd(cnpj) {
+    Repository().get("getEmpresaAdd", [{
+      name: "CNPJ",
+      value: cnpj
+    }], (data) => { dsEmpresaAdd = data[0] },
+      () => App.ui.showGenericError(), null, false
+    );
+    return dsEmpresaAdd;
+  }
+
+  function limparPopupInformarCNPJ() {
+    Interface.Telas.InformarCNPJ.Instances.CNPJ.option("value", null);
+    Interface.Telas.InformarCNPJ.Instances.CNPJ.option("isValid", true);
+    Interface.Telas.InformarCNPJ.Instances.BtnAvancar.option("done", null);
+  }
+
+  function initPopupConfirmacaoEmail(done) {
+    Interface.Telas.ConfirmacaoEmail.Instances.Popup = customPopup({
+      title: "Validar Email",
+      height: "auto",
+      contentTemplate: () => {
+        var template = App.ui.cloneTo(Interface.Telas.ConfirmacaoEmail.Templates.Template).show();
+
+        Interface.Telas.ConfirmacaoEmail.Instances.Codigo = App.dx.textBox(template.find(".codigo"), {
+          mask: "AAA.AAA",
+          inputAttr: { "style": "text-transform: uppercase" },
+          elementAttr: {
+            class: "d-none-i"
+          }
+        });
+
+        enableComponent(Interface.Telas.ConfirmacaoEmail.Instances.Codigo, { required: true })
+
+        Interface.Telas.ConfirmacaoEmail.Instances.BtnOk = App.dx.button(template.find(".btn-ok"), {
+          icon: "check",
+          text: "OK",
+          width: "100%",
+          onClick: () => {
+            if (Interface.Telas.ConfirmacaoEmail.Instances.Codigo.option("value").toUpperCase() == codigo) {
+              Interface.Telas.ConfirmacaoEmail.Instances.Popup.hide();
+              if (typeof func == "function") {
+                done();
+              }
+            } else {
+              Dados.Validado = {
+                Email: false
+              };
+              App.ui.showWarning("Código Inválido!")
+            }
+          }
+        });
+
+        return template;
+      },
+      onHidden: Interface.Telas.ConfirmacaoEmail.Limpar,
+      onShown: (e) => {
+        if (typeof done == "function") {
+          done();
+          e.component.option("onShown", null);
+        }
+      }
+    });
+  }
+
+  function limparPopupConfirmacaoEmail() {
+    Interface.Telas.ConfirmacaoEmail.Instances.Codigo.option("value", null);
+  }
+
+  function validateEmail(email, nome, doc, op, done) {
+    App.ui.blockElement();
+    var json = {
+      Email: email,
+      Nome: nome,
+      Doc: doc,
+      Op: op
+    }
+
+    App.service.execute(Dados.Instancia.IdVersao, { op: "VALIDAR_EMAIL", json: $.base64.encode(JSON.stringify(json)) }, ["dados"], true, false,
+      (response) => {
+        try {
+          var obj = trataResponse(response.dados);
+
+          if (obj.Errors) {
+            App.ui.showErrorsFromResponse(obj.Errors);
+            App.ui.unblockElement();
+          } else {
+            console.log(obj.Chave);
+            showPopupConfirmacaoEmail(obj.Chave, done);
+          }
+        } catch (e) {
+          App.ui.showAndSaveError(e, "Erro ao validar o e-mail!")
+          App.ui.unblockElement();
+        }
+      }
+    );
+  }
+
+  function showPopupConfirmacaoEmail(chave, done) {
+    if (!Interface.Telas.ConfirmacaoEmail.Instances.Popup) {
+      Interface.Telas.ConfirmacaoEmail.Init(() => showPopupConfirmacaoEmail(chave, done));
+    } else {
+      Interface.Telas.ConfirmacaoEmail.Instances.BtnOk.Chave = chave;
+      Interface.Telas.ConfirmacaoEmail.Instances.BtnOk.option("onClick", () => {
+        if (Interface.Telas.ConfirmacaoEmail.Instances.Codigo.option("value").toUpperCase() == Interface.Telas.ConfirmacaoEmail.Instances.BtnOk.Chave.toUpperCase()) {
+          Interface.Telas.ConfirmacaoEmail.Instances.Popup.hide();
+          if (typeof done == "function") {
+            done();
+          }
+        } else {
+          App.ui.showWarning("Código Inválido!")
+        }
+      });
+      Interface.Telas.ConfirmacaoEmail.Instances.Popup.show();
+      App.ui.unblockElement();
+    }
+  }
+
+  function initPopupDespacho(json) {
+    Interface.Telas.Despacho.Instances.Popup = customPopup({
+      title: json.action,
+      height: "auto",
+      contentTemplate: () => {
+        var template = App.ui.cloneTo(Interface.Telas.Despacho.Templates.Template).show();
+
+        Interface.Telas.Despacho.Instances.Despacho = App.dx.textArea(template.find(".despacho"), {
+          maxHeight: 150,
+        })
+        enableComponent(Interface.Telas.Despacho.Instances.Despacho, { required: true });
+
+        Interface.Telas.Despacho.Instances.GridDocumentos = App.dx.dataGrid(template.find(".grid-documentos"), {
+          scrolling: {
+            showScrollbar: "never"
+          },
+          selection: {
+            mode: 'multiple',
+          },
+          export: {
+            enabled: false
+          },
+          columnChooser: {
+            enabled: false
+          },
+          filterRow: {
+            visible: false
+          },
+          allowColumnReordering: false,
+        });
+
+        Interface.Telas.Despacho.Instances.BtnCancelar = App.dx.button(template.find(".btn-cancelar"), {
+          icon: "close",
+          text: "Cancelar",
+          onClick: () => {
+            Interface.Telas.Despacho.Instances.Popup.hide();
+          }
+        });
+
+        Interface.Telas.Despacho.Instances.BtnAvancar = App.dx.button(template.find(".btn-avancar"), {
+          text: "Avançar",
+          icon: "fa fa-check",
+          onClick: () => {
+            if (!validateAll(Interface.Telas.Despacho.Instances)) {
+              return;
+            }
+
+            if (json.op) {
+              json.DocsAnex = Interface.Telas.Despacho.Instances.GridDocumentos.getSelectedRowsData() || ""
+              json.Despacho = Interface.Telas.Despacho.Instances.Despacho.option("value") || ""
+
+              App.service.execute(Dados.Instancia.IdVersao, { op: json.op, json: $.base64.encode(JSON.stringify(json)) }, ["dados"], true, false,
+                (response) => {
+                  try {
+                    var obj = trataResponse(response.dados);
+
+                    if (obj.Errors) {
+                      App.ui.showErrorsFromResponse(obj.Errors);
+                      App.ui.unblockElement();
+                    } else {
+                      Interface.Telas.Despacho.Instances.Popup.hide()
+                      trocaTela(Interface.Telas.MinhasEmpresas, false);
+                      if (json.action == "Corrigir Cadastro") {
+                        App.ui.showSuccess("Cadastro enviado para correção!")
+                      } else {
+                        App.ui.showSuccess("Cadastro indeferido!")
+                      }
+                    }
+                  } catch (e) {
+                    if (action == "Corrigir Cadastro") {
+                      App.ui.showAndSaveError(e, "Erro ao enviar para a correção!")
+                    } else {
+                      App.ui.showAndSaveError(e, "Erro ao indeferir o cadastro!")
+                    }
+
+                    App.ui.unblockElement();
+                  }
+                }
+              );
+            } else {
+              Interface.Telas.Despacho.Instances.Popup.hide();
+              trocaTela(Interface.Telas.Empresa, false, getTituloAtividade());
+              getAcoesEtapa();
+            }
+          }
+        });
+
+        enableInstancesPopupDespacho(json, Interface.Telas.Despacho.Instances)
+
+        return template;
+      },
+      onHidden: Interface.Telas.Despacho.Limpar
+    });
+  }
+
+  function limparPopupDespacho() {
+    Interface.Telas.Despacho.Instances.GridDocumentos.option("dataSource", []);
+    Interface.Telas.Despacho.Instances.Despacho.option("value", null)
+  }
+
+  function enableInstancesPopupDespacho(json, inst) {
+    if (json.action == "Corrigir Cadastro") {
+      inst.GridDocumentos.option("visible", true)
+      inst.GridDocumentos.option("dataSource", [{
+        "TIPO_DOC_ITEM": 7002,
+        "TIPO_DOCUMENTO": "Cartão CNPJ"
+      }, {
+        "TIPO_DOC_ITEM": 7003,
+        "TIPO_DOCUMENTO": "Contrato Social"
+      }, {
+        "TIPO_DOC_ITEM": 10099,
+        "TIPO_DOCUMENTO": "Outros"
+      }])
+      inst.GridDocumentos.option("columns", [{
+        dataField: "TIPO_DOC_ITEM",
+        visible: false
+      }, {
+        dataField: "TIPO_DOCUMENTO",
+        caption: "Tipo de Documento",
+        visible: true
+      }])
+    } else if (json.action == "Correção do cadastro") {
+      inst.Despacho.option("readOnly", true)
+      inst.Despacho.option("value", Ativ.DESPACHO)
+
+      inst.GridDocumentos.option("visible", true)
+      inst.GridDocumentos.option("dataSource", getAnexar())
+      inst.GridDocumentos.option("selection", { mode: "none" })
+      inst.GridDocumentos.option("columns", [{
+        dataField: "ID_CTRL_ANEXO",
+        visible: false
+      }, {
+        dataField: "TIPO_DOCUMENTO",
+        caption: "Tipo de Documento",
+      }])
+
+      if (dsAnexar.length == 0) {
+        inst.GridDocumentos.option("visible", false)
+      }
+    } else if (json.action == "Visualizar despacho") {
+      inst.Despacho.option("readOnly", true)
+      inst.Despacho.option("value", json.DESPACHO)
+
+      inst.GridDocumentos.option("visible", false)
+
+      inst.BtnAvancar.option("visible", false)
+      inst.BtnCancelar.option("visible", false)
+    } else {
+      inst.GridDocumentos.option("visible", false)
+    }
+  }
+
+  function initTelaMinhasEmpresas() {
+    var template = App.ui.cloneTo(Interface.Telas.MinhasEmpresas.Templates.Tela).show();
+
+    Interface.Telas.MinhasEmpresas.Instances.TitleSolicit = template.find(".minhas-empresas")
+    Interface.Telas.MinhasEmpresas.Instances.TitleAnalist = template.find(".gerenciamento-empresas")
+
+    Interface.Telas.MinhasEmpresas.Instances.GridEmpresas = App.dx.dataGrid(template.find(".grid-empresas"), {
+      dataSource: getEmpresas(),
+      keyExpr: "ID_EMPRESA_PER",
+      hoverStateEnabled: true,
+      rowAlternationEnabled: true,
+      export: {
+        enabled: false
+      },
+      columnChooser: {
+        enabled: false
+      },
+      filterRow: {
+        visible: false
+      },
+      allowColumnReordering: false,
+      columns: [{
+        dataField: "ID_CTRL_ATIVIDADE",
+        dataType: "number",
+        visible: false
+      }, {
+        dataField: "NOME_FANTASIA",
+        visible: false
+      }, {
+        dataField: "INSCRICAO_ESTADUAL",
+        visible: false
+      }, {
+        dataField: "ID_ENDERECO",
+        dataType: "number",
+        visible: false
+      }, {
+        dataField: "DT_ABERTURA",
+        visible: false
+      }, {
+        dataField: "ID_EMPRESA_PER",
+        caption: "Nº da Empresa",
+        dataType: "number",
+        width: 100,
+        alignment: "center"
+      }, {
+        dataField: "CNPJ",
+        caption: "CNPJ",
+        alignment: "center"
+      }, {
+        dataField: "RAZAO_SOCIAL",
+        caption: "Razão Social",
+        dataType: "number",
+        alignment: "center"
+      }, {
+        dataField: "SITUACAO_ITEM",
+        caption: "Situação da Empresa",
+        dataType: "number",
+        alignment: "center",
+        cellTemplate: (elem, info) => {
+          var situacaoItem = info.data.SITUACAO_ITEM
+          if (info.rowType === "data") {
+            var div = $("<div/>").appendTo(elem);
+            var i = $("<i/>", { "class": "fa mr-5" }).appendTo(div);
+            i.addClass("fa-info-circle");
+            iconSituation(situacaoItem, div)
+            switch (situacaoItem) {
+              case 2:
+                div.append('<b>' + 'Em análise' + '</b>')
+                break
+              case 3:
+                div.append('<b>' + 'Aprovado' + '</b>')
+                break
+              case 4:
+                div.append('<b>' + 'Corrigindo dados' + '</b>')
+                break
+              case 5:
+                div.append('<b>' + 'Alterando dados' + '</b>')
+                break
+              case 90:
+                div.append('<b>' + 'Cancelado pelo Solicitante' + '</b>')
+                break
+              case 91:
+                div.append('<b>' + 'Recusado pelo Analista' + '</b>')
+                break
+              default:
+                i.removeClass("fa-info-circle");
+            }
+          }
+        }
+      }, {
+        caption: "...",
+        width: 55,
+        alignment: "center",
+        cellTemplate: (elem, info) => {
+          var actions = [];
+
+          if (info.data.ID_CTRL_ATIVIDADE) {
+            actions = [{
+              icon: "fa fa-external-link",
+              name: "Abrir Atividade",
+              func: () => checkPermissao({ IdAtiv: info.data.ID_CTRL_ATIVIDADE, IdEmpresa: info.data.ID_EMPRESA_PER, MenuIdAtual: MemoriaInstancia.Navegacao.MenuIdAtual },
+                () => initAtividade({ IdAtiv: info.data.ID_CTRL_ATIVIDADE, IdEmpresa: info.data.ID_EMPRESA_PER }),
+                () => {
+                  App.ui.showWarning("Você não possui permissão para acessar essa atividade!");
+                  trocaTela(Interface.Telas.MinhasEmpresas);
+                })
+            }];
+          } else {
+            actions = [{
+              icon: "fa fa-eye",
+              name: "Visualizar Empresa",
+              func: () => initAtividade({ IdEmpresa: info.data.ID_EMPRESA_PER })
+            }];
+          }
+
+          if (info.data.SITUACAO_ITEM == 3) {
+            actions = [{
+              icon: "fa-solid fa-right-left",
+              name: "Alterar Empresa",
+              func: () => {
+                var json = {
+                  IdEmpresa: info.data.ID_EMPRESA_PER,
+                  RAZAO_SOCIAL: info.data.RAZAO_SOCIAL,
+                  NOME_FANTASIA: info.data.NOME_FANTASIA,
+                  INSCRICAO_ESTADUAL: info.data.INSCRICAO_ESTADUAL,
+                  ID_ENDERECO: info.data.ID_ENDERECO,
+                  CNPJ: info.data.CNPJ,
+                  DT_ABERTURA: info.data.DT_ABERTURA,
+                  action: "Alterar Empresa"
+                }
+                DevExpress.ui.dialog.confirm("Deseja mesmo alterar a empresa? Será criada uma atividade de alteração e após o avanço será necessária uma nova análise do cadastro. Neste período a empresa não poderá realizar novas solicitações.",
+                  "Confirmar solicitação de alteração").done((result) => {
+                    if (result) { alterarEmpresa(json) }
+                  })
+              }
+            }]
+          }
+
+          return customActionCell({ actions: actions, forceDropDown: true });
+        }
+      }],
+      onOptionChanged: (e) => {
+        if (e.name == "dataSource") {
+          if (e.value && e.value.length > e.component.option("maxVisibleRows")) {
+            e.component.option("height", e.component.option("maxHeight"));
+          } else {
+            e.component.option("height", null);
+          }
+          e.component.refresh();
+        }
+      },
+      paging: {
+        enabled: false
+      },
+      maxVisibleRows: 20,
+      maxHeight: 600,
+      allowColumnResizing: false
+    });
+
+    Interface.Telas.MinhasEmpresas.Instances.BtnAdicionar = App.dx.button(template.find(".btn-adicionar"), {
+      icon: "add",
+      text: "Adicionar Empresa",
+      onClick: () => {
+        cadastrarEmpresa()
+      }
+    });
+
+    return template;
+  }
+
+  function refreshTelaMinhasEmpresas() {
+    Interface.Telas.MinhasEmpresas.Instances.GridEmpresas.option("dataSource", getEmpresas());
+  }
+
+  function enableTelaMinhasEmpresas() {
+    IdMenuAtual = MemoriaInstancia.Navegacao.MenuIdAtual
+    if (IdMenuAtual == 501) {
+      Interface.Telas.MinhasEmpresas.Instances.TitleSolicit.show()
+      Interface.Telas.MinhasEmpresas.Instances.BtnAdicionar.option("visible", true);
+    } else {
+      Interface.Telas.MinhasEmpresas.Instances.TitleAnalist.show()
+      Interface.Telas.MinhasEmpresas.Instances.BtnAdicionar.option("visible", false);
+    }
+  }
+
+  function limparTelaMinhasEmpresas() {
+    Interface.Telas.MinhasEmpresas.Instances.GridEmpresas.option("dataSource", []);
+    Interface.Telas.MinhasEmpresas.Instances.BtnAdicionar.option("done", null);
+  }
+
+  function getEmpresas() {
+    if (MemoriaInstancia.Navegacao.MenuIdAtual == 501) {
+      Repository().get("getMinhasEmpresas", [{
+        name: "ID_PESSOA",
+        value: Dados.Ctrl.IdPessoa
+      }, {
+        name: "CPF",
+        value: Dados.Ctrl.CPF
+      }], (data) => { dsEmpresas = data },
+        () => App.ui.showGenericError(), null, false
+      );
+    } else {
+      Repository().get("getEmpresas", "", (data) => { dsEmpresas = data }, () => App.ui.showGenericError(), null, false);
+    }
+    return dsEmpresas;
+  }
+
+  function iconSituation(situacaoItem, div) {
+    if (situacaoItem == 2 || situacaoItem == 4 || situacaoItem == 5) {
+      div.addClass("msg-warning");
+    } else if (situacaoItem == 90 || situacaoItem == 91) {
+      div.addClass("msg-danger");
+    } else if (situacaoItem == 3) {
+      div.addClass("msg-success");
+    }
+  }
+
+  function cadastrarEmpresa() {
+    if (!Interface.Telas.InformarCNPJ.Instances.Popup) {
+      Interface.Telas.InformarCNPJ.Init(cadastrarEmpresa);
+    } else {
+      Interface.Telas.InformarCNPJ.Instances.BtnAvancar.done = validarCNPJCadastrarEmpresa;
+      Interface.Telas.InformarCNPJ.Instances.Popup.show();
+    }
+  }
+
+  function validarCNPJCadastrarEmpresa(cnpj) {
+    var json = { CNPJ: cnpj }
+    adicionarEmpresa(initAtividade, json)
+  }
+
+  function adicionarEmpresa(done, json) {
+    json.Login = MemoriaInstancia.Login;
+    json.action = "Adicionar Empresa"
+    App.service.execute(Dados.Instancia.IdVersao, { instOrigem: Dados.Instancia.IdInstancia, op: "ADICIONAR_EMPRESA", json: $.base64.encode(JSON.stringify(json)) }, ["dados"], true, false,
+      (response) => {//done
+        try {
+          var obj = trataResponse(response.dados);
+          if (obj.Errors) {
+            App.showErrorsFromResponse(obj.Errors);
+            App.ui.unblockElement(Interface.Telas.InformarCNPJ.Instances.Popup.content());
+          } else {
+            App.ui.unblockElement(Interface.Telas.InformarCNPJ.Instances.Popup.content());
+            Interface.Telas.InformarCNPJ.Instances.Popup.hide();
+            if (typeof done == "function") done({ IdAtiv: obj.IdAtiv, IdEmpresa: obj.IdEmpresa });
+          }
+        } catch (e) {
+          App.ui.showAndSaveError(e, "Erro ao adicionar a Empresa!")
+          App.ui.unblockElement(Interface.Telas.InformarCNPJ.Instances.Popup.content());
+        }
+      }, () => {
+        App.ui.showGenericError();
+        App.ui.unblockElement(Interface.Telas.InformarCNPJ.Instances.Popup.content());
+      });//fail
+  }
+
+  function alterarEmpresa(json) {
+    json.Login = MemoriaInstancia.Login
+
+    App.service.execute(Dados.Instancia.IdVersao, { op: "ALTERAR_EMPRESA", json: $.base64.encode(JSON.stringify(json)) }, ["dados"], true, false,
+      (response) => {
+        try {
+          var obj = trataResponse(response.dados);
+
+          if (obj.Errors) {
+            App.ui.showErrorsFromResponse(obj.Errors);
+            App.ui.unblockElement();
+          } else {
+            initAtividade(obj)
+          }
+        } catch (e) {
+          App.ui.showAndSaveError(e, "Erro ao alterar a empresa!")
+          App.ui.unblockElement();
+        }
+      }
+    );
+  }
+
+  function initTelaEmpresa() {
+    var template = App.ui.cloneTo(Interface.Telas.Empresa.Templates.Tela).show();
+
+    Interface.Telas.Empresa.Instances.BtnVoltar = App.dx.button(template.find(".btn-voltar"), {
+      icon: "arrowleft",
+      text: "Voltar",
+      onClick: () => {
+        trocaTela(Interface.Telas.MinhasEmpresas, false);
+      }
+    });
+
+    Interface.Telas.Empresa.Instances.TabPanel = App.dx.tabPanel(template.find(".tab-panel"), {
+      dataSource: [{
+        title: "Dados da Empresa",
+        Init: initTabDadosEmpresa,
+        Refresh: refreshTabDadosEmpresa,
+        Enable: enableTabDadosEmpresa,
+        Limpar: limparTabDadosEmpresa
+      }, {
+        title: "Sócios",
+        Init: initTabSociosEmpresa,
+        Refresh: refreshTabSociosEmpresa,
+        Enable: enableTabSociosEmpresa,
+        Limpar: limparTabSociosEmpresa
+      }, {
+        title: "Documentos",
+        Init: initTabDocumentosEmpresa,
+        Refresh: refreshTabDocumentosEmpresa,
+        Limpar: limparTabDocumentosEmpresa
+      }, {
+        title: "Histórico",
+        Init: initTabHistoricoEmpresa,
+        Refresh: refreshTabHistoricoEmpresa,
+        Limpar: limparTabHistoricoEmpresa
+      }],
+      itemTemplate: (data) => {
+        if (!data.Element) {
+          data.Element = data.Init();
+        }
+        data.Refresh();
+        if (data.Enable) {
+          data.Enable();
+        }
+
+        return data.Element;
+      },
+      onSelectionChanged: (e) => {
+        var t = e.addedItems[0].title;
+        if (t == "Dados da Empresa") {
+          Interface.Telas.Empresa.Instances.GridAnexar.repaint();
+        } else if (t == "Sócios") {
+          Interface.Telas.Empresa.Instances.GridSocios.repaint();
+        } else if (t == "Documentos") {
+          Interface.Telas.Empresa.Instances.GridDocumentos.repaint();
+        } else if (t == "Histórico") {
+          Interface.Telas.Empresa.Instances.GridHistorico.repaint();
+        }
+      }
+    });
+
+    return template;
+  }
+
+  function refreshTelaEmpresa() {
+    var ds = Interface.Telas.Empresa.Instances.TabPanel.option("dataSource");
+    ds = ds.map((v) => {
+      if (v.Element) {
+        v.Limpar();
+        v.Refresh();
+        if (v.Enable) {
+          v.Enable();
+        }
+        v.Element.detach();
+      }
+
+      if (v.title == "Documentos") {
+        if (Empresa && Empresa.Documentos && Empresa.Documentos.length > 0) {
+          v.visible = true;
+        } else {
+          v.visible = false;
+        }
+      }
+
+      return v;
+    });
+
+    Interface.Telas.Empresa.Instances.TabPanel.option("dataSource", ds);
+
+    var selectedIndex = Interface.Telas.Empresa.Instances.TabPanel.option("selectedIndex") || 0;
+    Interface.Telas.Empresa.Instances.TabPanel.option("selectedIndex", selectedIndex);
+  }
+
+  function limparTelaEmpresa() {
+    Interface.Telas.Empresa.Instances.TabPanel.option("dataSource").map((v) => v.Limpar());
+    if (Interface.Telas.GridAnexar.Element) {
+      Interface.Telas.GridAnexar.Limpar();
+    }
+  }
+
+
+  function initTabDadosEmpresa() {
+    var template = App.ui.cloneTo(Interface.Telas.Empresa.Templates.DadosEmpresa).show()
+
+    Interface.Telas.Empresa.Instances.CNPJ = App.dx.textBox(template.find(".cnpj"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.RazaoSocial = App.dx.textBox(template.find(".razao-social"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.NomeFantasia = App.dx.textBox(template.find(".nome-fantasia"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.DtAbertura = App.dx.dateBox(template.find(".data-abertura"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.InscricaoEstadual = App.dx.textBox(template.find(".inscricao-estadual"), {
+      readOnly: true
+    })
+
+    Interface.Telas.Empresa.Instances.CEP = App.dx.textBox(template.find(".cep"), {
+      readOnly: true,
+      mask: "00000-000",
+      useMaskedValue: false,
+      buttons: [{
+        location: "after",
+        name: "btn-cep",
+        options: {
+          icon: "search",
+          disabled: true,
+          visible: false,
+          elementAttr: {
+            class: "inner-btn"
+          },
+          onClick: () => App.data.buscaCEP((Interface.Telas.Empresa.Instances.CEP.option("value") || ""), (obj) => {
+            Interface.Telas.Empresa.Instances.Logradouro.option("value", obj.logradouro);
+            Interface.Telas.Empresa.Instances.Bairro.option("value", obj.bairro);
+            Interface.Telas.Empresa.Instances.Cidade.option("value", obj.localidade);
+            Interface.Telas.Empresa.Instances.Estado.option("value", obj.uf);
+          }, () => App.ui.showInfo("Nenhum dado encontrado para o CEP informado!"))
+        }
+      }]
+    });
+    Interface.Telas.Empresa.Instances.BtnCEP = Interface.Telas.Empresa.Instances.CEP.getButton("btn-cep");
+
+    Interface.Telas.Empresa.Instances.Logradouro = App.dx.textBox(template.find(".logradouro"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.Numero = App.dx.textBox(template.find(".numero"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.Complemento = App.dx.textBox(template.find(".complemento"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.Bairro = App.dx.textBox(template.find(".bairro"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.Cidade = App.dx.textBox(template.find(".cidade"), {
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.Estado = App.dx.textBox(template.find(".estado"), {
+      maxLength: 2,
+      readOnly: true
+    });
+
+    Interface.Telas.Empresa.Instances.Celular = App.dx.textBox(template.find(".celular"), {
+      readOnly: true,
+      mask: "(00) 00000-0000",
+      useMaskedValue: false,
+    });
+
+    Interface.Telas.Empresa.Instances.Telefone = App.dx.textBox(template.find(".telefone"), {
+      readOnly: true,
+      mask: "(00) 90000-0000",
+      useMaskedValue: false,
+    });
+
+    Interface.Telas.Empresa.Instances.TelefoneRecado = App.dx.textBox(template.find(".telefone-recado"), {
+      readOnly: true,
+      mask: "(00) 90000-0000",
+      useMaskedValue: false,
+    });
+
+    Interface.Telas.Empresa.Instances.Email = App.dx.textBox(template.find(".e-mail"), {
+      readOnly: true,
+      value: Empresa.DESCR_MAIL || "",
+      buttons: [{
+        location: "after",
+        name: "btn-validar",
+        options: {
+          icon: "email",
+          text: "Validar e-mail",
+          disabled: true,
+          visible: false,
+          elementAttr: {
+            class: "inner-btn"
+          },
+          onClick: () => {
+            var valid = Interface.Telas.Empresa.Instances.Email.Validate(true);
+            if (valid) {
+              validateEmail(
+                Interface.Telas.Empresa.Instances.Email.option("value"),
+                Interface.Telas.Empresa.Instances.RazaoSocial.option("value"),
+                Empresa.CNPJ,
+                "Empresa",
+                () => {
+                  Interface.Telas.Empresa.Instances.Email.EmailValidado = Interface.Telas.Empresa.Instances.Email.option("value");
+                  Interface.Telas.Empresa.Instances.BtnValidarEmail.option("disabled", true);
+                  Interface.Telas.Empresa.Instances.BtnValidarEmail.option("icon", "check");
+                })
+            }
+          }
+        }
+      }],
+      onValueChanged: (e) => {
+        if (Interface.Telas.Empresa.Instances.Email.EmailValidado && Interface.Telas.Empresa.Instances.Email.EmailValidado == e.value) {
+          Interface.Telas.Empresa.Instances.BtnValidarEmail.option("disabled", true);
+          Interface.Telas.Empresa.Instances.BtnValidarEmail.option("icon", "check");
+        } else {
+          Interface.Telas.Empresa.Instances.BtnValidarEmail.option("disabled", false);
+          Interface.Telas.Empresa.Instances.BtnValidarEmail.option("icon", "email");
+        }
+      }
+    });
+
+    Interface.Telas.Empresa.Instances.BtnValidarEmail = Interface.Telas.Empresa.Instances.Email.getButton("btn-validar");
+
+    Interface.Telas.Empresa.Instances.TemplateGridAnexar = template.find(".template-grid-anexar").show()
+
+    Interface.Telas.Empresa.Instances.GridAnexar = App.dx.dataGrid(template.find(".grid-anexar"), {
+      dataSource: getAnexar(),
+      columns: [{
+        dataField: "ID_CTRL_ANEXO",
+        visible: false
+      }, {
+        dataField: "TIPO_DOCUMENTO",
+        caption: "Tipo de Documento",
+        alignment: "center",
+      }, {
+        dataField: "NOME_ANEXO",
+        caption: "Nome do Anexo",
+        alignment: "center",
+      }, {
+        alignment: "center",
+        dataField: "IND_OBRIGATORIO",
+        caption: "Obrigatório?",
+        encodeHtml: false,
+        width: 90,
+        cellTemplate: (_, info) => {
+          if (info.data.IND_OBRIGATORIO == "S") {
+            return App.ui.cloneTo(Interface.Telas.Empresa.Templates.AnexoObrigatorio).show();
+          } else {
+            return App.ui.cloneTo(Interface.Telas.Empresa.Templates.AnexoOpcional).show();
+          }
+        }
+      }, {
+        alignment: "center",
+        caption: "Ações",
+        width: 55,
+        cellTemplate: (_, info) => uploadActionCell(info.data, Interface.Telas.Empresa.Instances.GridAnexar.Refresh),
+      }],
+      export: {
+        enabled: false
+      },
+      columnChooser: {
+        enabled: false
+      },
+      filterRow: {
+        visible: false
+      },
+      allowColumnReordering: false,
+    });
+
+    Interface.Telas.Empresa.Instances.GridAnexar.Refresh = () => {
+      Interface.Telas.Empresa.Instances.GridAnexar.option("dataSource", getAnexar());
+    }
+
+    Interface.Telas.Empresa.Instances.GridAnexar.Check = (done) => {
+      App.ui.blockElement();
+      Repository().get("checkAnexar", [{
+        name: "ID_CTRL_ATIVIDADE",
+        value: Dados.IdAtiv
+      }], (data) => {
+        if (data && data.length > 0) {
+          var warning = "Os anexos abaixo são obrigatórios e não foram enviados: <ul>";
+          data.map((v) => {
+            warning = warning + "<li>" + v.TIPO_DOCUMENTO + "</li>";
+          });
+          warning = warning + "</ul>";
+          App.ui.showWarning(warning);
+        } else if (typeof done == "function") {
+          done();
+        }
+        App.ui.unblockElement();
+      }, (e) => App.ui.showAndSaveError(e));
+    }
+
+    return template;
+  }
+
+  function getAnexar() {
+    Repository().get("getAnexar", [{
+      name: "ID_CTRL_ATIVIDADE",
+      value: Dados.IdAtiv
+    }], (data) => { dsAnexar = data; },
+      () => App.ui.showGenericError(), null, false
+    )
+
+    return dsAnexar;
+  }
+
+  function refreshTabDadosEmpresa() {
+    Interface.Telas.Empresa.Instances.CNPJ.option("value", Empresa.CNPJ);
+    Interface.Telas.Empresa.Instances.RazaoSocial.option("value", Empresa.RAZAO_SOCIAL);
+    Interface.Telas.Empresa.Instances.NomeFantasia.option("value", Empresa.NOME_FANTASIA);
+    Interface.Telas.Empresa.Instances.InscricaoEstadual.option("value", Empresa.INSCRICAO_ESTADUAL || "");
+    Interface.Telas.Empresa.Instances.DtAbertura.option("value", DevExpress.localization.parseDate(Empresa.DT_ABERTURA));
+    Interface.Telas.Empresa.Instances.CEP.option("value", Empresa.DESCR_CEP);
+    Interface.Telas.Empresa.Instances.Logradouro.option("value", Empresa.DESCR_RUA);
+    Interface.Telas.Empresa.Instances.Numero.option("value", Empresa.DESCR_NUMERO);
+    Interface.Telas.Empresa.Instances.Complemento.option("value", Empresa.DESCR_COMPLEMENTO);
+    Interface.Telas.Empresa.Instances.Bairro.option("value", Empresa.DESCR_BAIRRO);
+    Interface.Telas.Empresa.Instances.Cidade.option("value", Empresa.DESCR_MUNICIPIO);
+    Interface.Telas.Empresa.Instances.Estado.option("value", Empresa.DESCR_UF);
+    Interface.Telas.Empresa.Instances.Celular.option("value", (Empresa.DDD_CELULAR || "") + (Empresa.FONE_CELULAR || ""));
+    Interface.Telas.Empresa.Instances.Telefone.option("value", (Empresa.DDD_RESIDENCIAL || "") + (Empresa.FONE_RESIDENCIAL && Empresa.FONE_RESIDENCIAL.length == 8 ? " " : "") + (Empresa.FONE_RESIDENCIAL || ""));
+    Interface.Telas.Empresa.Instances.TelefoneRecado.option("value", (Empresa.DDD_RECADO || "") + (Empresa.FONE_RECADO && Empresa.FONE_RECADO.length == 8 ? " " : "") + (Empresa.FONE_RECADO || ""));
+    Interface.Telas.Empresa.Instances.Email.option("value", Empresa.DESCR_MAIL);
+  }
+
+  function enableTabDadosEmpresa() {
+    if (Empresa.SITUACAO_ITEM == 1 || Empresa.SITUACAO_ITEM == 4 || Empresa.SITUACAO_ITEM == 5) {
+      /* Situação Padrão | Corrigindo dados | Alterando Dados */
+      enableComponent(Interface.Telas.Empresa.Instances.RazaoSocial, { required: true });
+      Interface.Telas.Empresa.Instances.RazaoSocial.option("isValid", true);
+      enableComponent(Interface.Telas.Empresa.Instances.NomeFantasia, { required: true });
+      Interface.Telas.Empresa.Instances.NomeFantasia.option("isValid", true);
+      Interface.Telas.Empresa.Instances.CNPJ.element().parent().find(".required").show();
+      enableComponent(Interface.Telas.Empresa.Instances.InscricaoEstadual);
+      Interface.Telas.Empresa.Instances.InscricaoEstadual.option("isValid", true);
+      enableComponent(Interface.Telas.Empresa.Instances.DtAbertura, { required: true });
+      if (Empresa.SITUACAO_ITEM == 1) {
+        enableComponent(Interface.Telas.Empresa.Instances.DtAbertura, { required: true, data: true });
+      }
+      Interface.Telas.Empresa.Instances.DtAbertura.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.CEP, { required: true });
+      Interface.Telas.Empresa.Instances.CEP.option("isValid", true);
+      Interface.Telas.Empresa.Instances.BtnCEP.option("disabled", false);
+      Interface.Telas.Empresa.Instances.BtnCEP.option("visible", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Logradouro, { required: true });
+      Interface.Telas.Empresa.Instances.Logradouro.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Numero, { required: true });
+      Interface.Telas.Empresa.Instances.Numero.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Complemento);
+      Interface.Telas.Empresa.Instances.Complemento.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Bairro, { required: true });
+      Interface.Telas.Empresa.Instances.Bairro.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Cidade, { required: true });
+      Interface.Telas.Empresa.Instances.Cidade.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Estado, { required: true });
+      Interface.Telas.Empresa.Instances.Estado.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Celular, { required: true });
+      Interface.Telas.Empresa.Instances.Celular.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Telefone, { required: true });
+      Interface.Telas.Empresa.Instances.Telefone.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.TelefoneRecado);
+      Interface.Telas.Empresa.Instances.TelefoneRecado.option("isValid", true);
+
+      enableComponent(Interface.Telas.Empresa.Instances.Email, { required: true, email: true });
+      Interface.Telas.Empresa.Instances.Email.option("isValid", true);
+      Interface.Telas.Empresa.Instances.Email.EmailValidado = Empresa.DESCR_MAIL;
+
+      Interface.Telas.Empresa.Instances.BtnValidarEmail.option("visible", true);
+
+      Interface.Telas.Empresa.Instances.GridAnexar.option("dataSource", getAnexar());
+      if (dsAnexar.length == 0) {
+        Interface.Telas.Empresa.Instances.TemplateGridAnexar.hide()
+      } else {
+        Interface.Telas.Empresa.Instances.TemplateGridAnexar.show()
+      }
+    } else {
+      Interface.Telas.Empresa.Instances.RazaoSocial.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.NomeFantasia.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.CNPJ.element().parent().find(".required").hide();
+      Interface.Telas.Empresa.Instances.DtAbertura.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.CEP.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Logradouro.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Numero.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Bairro.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Cidade.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Estado.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Celular.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Telefone.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.Email.element().parent().find(".required").hide()
+      Interface.Telas.Empresa.Instances.RazaoSocial.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.NomeFantasia.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.DtAbertura.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Logradouro.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Numero.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Bairro.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Cidade.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Estado.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Celular.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Telefone.option("validationStatus", "valid");
+      Interface.Telas.Empresa.Instances.Email.option("validationStatus", "valid");
+    }
+  }
+
+  function limparTabDadosEmpresa() {
+    Interface.Telas.Empresa.Instances.CNPJ.option("value", null);
+    Interface.Telas.Empresa.Instances.RazaoSocial.option("value", null);
+    Interface.Telas.Empresa.Instances.RazaoSocial.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.NomeFantasia.option("value", null);
+    Interface.Telas.Empresa.Instances.NomeFantasia.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.InscricaoEstadual.option("value", null);
+    Interface.Telas.Empresa.Instances.InscricaoEstadual.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.DtAbertura.option("value", null);
+    Interface.Telas.Empresa.Instances.DtAbertura.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.CEP.option("value", null);
+    Interface.Telas.Empresa.Instances.CEP.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.BtnCEP.option("disabled", true);
+    Interface.Telas.Empresa.Instances.BtnCEP.option("visible", false);
+    Interface.Telas.Empresa.Instances.Logradouro.option("value", null);
+    Interface.Telas.Empresa.Instances.Logradouro.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Numero.option("value", null);
+    Interface.Telas.Empresa.Instances.Numero.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Complemento.option("value", null);
+    Interface.Telas.Empresa.Instances.Complemento.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Bairro.option("value", null);
+    Interface.Telas.Empresa.Instances.Bairro.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Cidade.option("value", null);
+    Interface.Telas.Empresa.Instances.Cidade.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Estado.option("value", null);
+    Interface.Telas.Empresa.Instances.Estado.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Celular.option("value", null);
+    Interface.Telas.Empresa.Instances.Celular.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Telefone.option("value", null);
+    Interface.Telas.Empresa.Instances.Telefone.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.TelefoneRecado.option("value", null);
+    Interface.Telas.Empresa.Instances.TelefoneRecado.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Email.option("value", null);
+    Interface.Telas.Empresa.Instances.Email.option("readOnly", true);
+    Interface.Telas.Empresa.Instances.Email.EmailValidado = null;
+    Interface.Telas.Empresa.Instances.BtnValidarEmail.option("disabled", true);
+    Interface.Telas.Empresa.Instances.BtnValidarEmail.option("visible", false);
+    Interface.Telas.Empresa.Instances.TemplateGridAnexar.hide()
+  }
+
+  function initTabSociosEmpresa() {
+    var template = App.ui.cloneTo(Interface.Telas.Empresa.Templates.Socios).show();
+    IdMenuAtual = MemoriaInstancia.Navegacao.MenuIdAtual
+
+    Interface.Telas.Empresa.Instances.GridSocios = App.dx.dataGrid(template.find(".grid-socios"), {
+      dataSource: getSocios(),
+      columns: [{
+        dataField: "ID_SOCIO_PER",
+        visible: false
+      }, {
+        dataField: "NOME_SOCIO",
+        caption: "Nome",
+        alignment: "center",
+      }, {
+        dataField: "CPF_SOCIO",
+        caption: "Documento",
+        alignment: "center",
+      }, {
+        dataField: "CELULAR",
+        caption: "Celular",
+        alignment: "center",
+      }, {
+        dataField: "TELEFONE",
+        caption: "Telefone",
+        alignment: "center",
+      }, {
+        dataField: "EMAIL",
+        caption: "Email",
+        alignment: "center",
+      }, {
+        caption: "...",
+        alignment: "center",
+        width: 55,
+        cellTemplate: (_, info) => {
+          if (Ativ && IdMenuAtual == 501) {
+            var actions = [{
+              name: "Alterar Sócio",
+              icon: "fa-solid fa-right-left",
+              func: () => {
+                var json = info.data
+                json.action = "Alterar Sócio"
+                json.refresh = Interface.Telas.Empresa.Instances.GridSocios.Refresh
+                initPopupAdicionarSocio(json);
+              }
+            }, {
+              name: "Remover Sócio",
+              icon: "fa-solid fa-xmark",
+              func: () => {
+                var json = { idSocio: info.data.ID_SOCIO_PER }
+                json.refresh = Interface.Telas.Empresa.Instances.GridSocios.Refresh
+
+                DevExpress.ui.dialog.confirm("Confirma a exclusão do sócio?", "Confirmar").done((result) => {
+                  if (result) { addOrAltOrDelSocio(json) }
+                });
+              }
+            }];
+          } else {
+            var actions = [{
+              name: "Visualizar Sócio",
+              icon: "fa fa-eye",
+              func: () => {
+                var json = info.data;
+                json.action = "Visualizar Sócio"
+                json.refresh = Interface.Telas.Empresa.Instances.GridSocios.Refresh
+                initPopupAdicionarSocio(json);
+              }
+            }];
+          }
+          return customActionCell({ actions: actions });
+        }
+      }],
+      export: {
+        enabled: false
+      },
+      columnChooser: {
+        enabled: false
+      },
+      filterRow: {
+        visible: false
+      },
+      allowColumnReordering: false
+    });
+
+    Interface.Telas.Empresa.Instances.GridSocios.Refresh = () => {
+      Interface.Telas.Empresa.Instances.GridSocios.option("dataSource", getSocios());
+    }
+
+    Interface.Telas.Empresa.Instances.BtnAddSocio = App.dx.button(template.find(".btn-add-socio"), {
+      icon: "add",
+      text: "Adicionar Sócio",
+      width: "100%",
+      onClick: () => {
+        var json = {
+          action: "Adicionar Sócio",
+          refresh: Interface.Telas.Empresa.Instances.GridSocios.Refresh
+        }
+        initPopupAdicionarSocio(json);
+      }
+    });
+
+    return template;
+  }
+
+  function refreshTabSociosEmpresa() {
+    Interface.Telas.Empresa.Instances.GridSocios.option("dataSource", getSocios());
+  }
+
+  function enableTabSociosEmpresa() {
+    IdMenuAtual = MemoriaInstancia.Navegacao.MenuIdAtual
+    if (!(IdMenuAtual == 501 && Ativ)) {
+      Interface.Telas.Empresa.Instances.BtnAddSocio.option("visible", false)
+    } else {
+      Interface.Telas.Empresa.Instances.BtnAddSocio.option("visible", true)
+    }
+  }
+
+  function limparTabSociosEmpresa() {
+    Interface.Telas.Empresa.Instances.GridSocios.option("dataSource", []);
+  }
+
+  function initPopupAdicionarSocio(json) {
+    Interface.Telas.AdicionarSocio.Instances.Popup = customPopup({
+      title: json.action,
+      height: "auto",
+      contentTemplate: () => {
+        var template = App.ui.cloneTo(Interface.Telas.AdicionarSocio.Templates.Template).show();
+        var cpfAtualSocio = json.CPF_SOCIO || ""
+
+        Interface.Telas.AdicionarSocio.Instances.Nome = App.dx.textBox(template.find(".nome-socio"), {
+          value: json.action == "Alterar Sócio" || json.action == "Visualizar Sócio" ? json.NOME_SOCIO : "",
+          readOnly: json.action == "Visualizar Sócio" ? true : false
+        });
+
+        Interface.Telas.AdicionarSocio.Instances.CPF = App.dx.textBox(template.find(".cpf-socio"), {
+          mask: "000.000.000-00",
+          value: json.action == "Alterar Sócio" || json.action == "Visualizar Sócio" ? json.CPF_SOCIO : "",
+          readOnly: json.action == "Visualizar Sócio" ? true : false,
+        });
+
+        Interface.Telas.AdicionarSocio.Instances.Celular = App.dx.textBox(template.find(".celular-socio"), {
+          mask: "(00) 00000-0000",
+          useMaskedValue: false,
+          value: json.action == "Alterar Sócio" || json.action == "Visualizar Sócio" ? json.CELULAR : "",
+          readOnly: json.action == "Visualizar Sócio" ? true : false
+        });
+
+        Interface.Telas.AdicionarSocio.Instances.Telefone = App.dx.textBox(template.find(".telefone-socio"), {
+          mask: "(00) 90000-0000",
+          useMaskedValue: false,
+          value: json.action == "Alterar Sócio" || json.action == "Visualizar Sócio" ? json.TELEFONE : "",
+          readOnly: json.action == "Visualizar Sócio" ? true : false
+        });
+
+        Interface.Telas.AdicionarSocio.Instances.Email = App.dx.textBox(template.find(".email-socio"), {
+          value: json.action == "Alterar Sócio" || json.action == "Visualizar Sócio" ? json.EMAIL : "",
+          readOnly: json.action == "Visualizar Sócio" ? true : false
+        });
+
+        if (!(json.action == "Visualizar Sócio")) {
+          enableComponent(Interface.Telas.AdicionarSocio.Instances.Celular, { required: true });
+          enableComponent(Interface.Telas.AdicionarSocio.Instances.Email, { required: true, email: true });
+          enableComponent(Interface.Telas.AdicionarSocio.Instances.CPF, { required: true, mask: true, cpfcnpj: true, cpf: true });
+
+          Interface.Telas.AdicionarSocio.Instances.BtnAvancar = App.dx.button(template.find(".btn-avancar"), {
+            icon: "check",
+            text: "Avançar",
+            onClick: () => {
+              getSocio(Interface.Telas.AdicionarSocio.Instances.CPF.option("value"))
+              if (dsSocio) {
+                if (dsSocio.CPF_SOCIO == cpfAtualSocio) {
+                  !(enableComponent(Interface.Telas.AdicionarSocio.Instances.CPF, { required: true, mask: true, cpfcnpj: true, cpf: false }))
+                }
+              }
+
+              if (validateAll(Interface.Telas.AdicionarSocio.Instances)) {
+                json.idSocio = json.ID_SOCIO_PER;
+                addOrAltOrDelSocio(json)
+                Interface.Telas.AdicionarSocio.Instances.Popup.hide()
+              }
+            }
+          });
+
+          Interface.Telas.Empresa.Instances.BtnCancelar = App.dx.button(template.find(".btn-cancelar"), {
+            icon: "close",
+            text: "Cancelar",
+            onClick: () => {
+              Interface.Telas.AdicionarSocio.Instances.Popup.hide()
+            }
+          });
+        }
+
+        return template;
+      },
+      onHidden: Interface.Telas.AdicionarSocio.Limpar,
+    });
+  }
+
+  function limparPopupAdicionarSocio() {
+    Interface.Telas.AdicionarSocio.Instances.Nome.option("value", null);
+    Interface.Telas.AdicionarSocio.Instances.Nome.option("readOnly", true);
+    Interface.Telas.AdicionarSocio.Instances.CPF.option("value", null);
+    Interface.Telas.AdicionarSocio.Instances.CPF.option("readOnly", true);
+    Interface.Telas.AdicionarSocio.Instances.Celular.option("value", null);
+    Interface.Telas.AdicionarSocio.Instances.Celular.option("readOnly", true);
+    Interface.Telas.AdicionarSocio.Instances.Telefone.option("value", null);
+    Interface.Telas.AdicionarSocio.Instances.Telefone.option("readOnly", true);
+    Interface.Telas.AdicionarSocio.Instances.Email.option("value", null);
+    Interface.Telas.AdicionarSocio.Instances.Email.option("readOnly", true);
+  }
+
+  function addOrAltOrDelSocio(json) {
+    refreshGrid = json.refresh
+
+    if (json.action == "Adicionar Sócio") {
+      json.action = "Adicionar Sócio"
+    }
+
+    var json = {
+      action: json.action || "",
+      ID_SOCIO_PER: json.idSocio,
+      ID_EMPRESA_PER: Empresa.ID_EMPRESA_PER,
+      NOME_SOCIO: Interface.Telas.AdicionarSocio.Instances.Nome.option("value"),
+      CPF_SOCIO: Interface.Telas.AdicionarSocio.Instances.CPF.option("value"),
+      CELULAR: Interface.Telas.AdicionarSocio.Instances.Celular.option("value"),
+      TELEFONE: Interface.Telas.AdicionarSocio.Instances.Telefone.option("value"),
+      EMAIL: Interface.Telas.AdicionarSocio.Instances.Email.option("value")
+    }
+
+    App.service.execute(Dados.Instancia.IdVersao, { op: "ADICIONAR_ALTERAR_EXCLUIR_SOCIO", json: $.base64.encode(JSON.stringify(json)) }, ["dados"], true, false,
+      (response) => {
+        try {
+          var obj = trataResponse(response.dados);
+
+          if (obj.Errors) {
+            App.ui.showErrorsFromResponse(obj.Errors);
+            App.ui.unblockElement();
+          } else {
+            if (json.action == "Adicionar Sócio") {
+              App.ui.showSuccess("Sócio adicionado com sucesso.")
+            } else if (json.action == "Alterar Sócio") {
+              App.ui.showSuccess("Sócio alterado com sucesso.")
+            } else {
+              App.ui.showSuccess("Sócio removido com sucesso.")
+            }
+            refreshGrid();
+          }
+        } catch (e) {
+          if (json.action == "Adicionar Sócio") {
+            App.ui.showAndSaveError(e, "Erro ao adicionar o sócio!")
+          } else if (json.action == "Alterar Sócio") {
+            App.ui.showAndSaveError(e, "Erro ao alterar o sócio!")
+          } else {
+            App.ui.showAndSaveError(e, "Erro ao remover o sócio!")
+          }
+          App.ui.unblockElement();
+        }
+      }
+    );
+  }
+
+  function getSocios() {
+    Repository().get("getSocios", [{
+      name: "ID_EMPRESA_PER",
+      value: Empresa.ID_EMPRESA_PER
+    }], (data) => { dsSocios = data },
+      () => App.ui.showGenericError(), null, false
+    );
+    return dsSocios;
+  }
+
+  function getSocio(cpfSocio) {
+    Repository().get("getSocio", [{
+      name: "CPF",
+      value: cpfSocio
+    }, {
+      name: "ID_EMPRESA_PER",
+      value: Empresa.ID_EMPRESA_PER
+    }], (data) => { dsSocio = data[0] },
+      () => App.ui.showGenericError(), null, false
+    );
+    return dsSocio;
+  }
+
+  function initTabDocumentosEmpresa() {
+    var template = App.ui.cloneTo(Interface.Telas.Empresa.Templates.Documentos).show();
+
+    Interface.Telas.Empresa.Instances.GridDocumentos = App.dx.dataGrid(template.find(".grid-documentos"), {
+      dataSource: getDocAnex(),
+      columns: [{
+        dataField: "ID_CTRL_ANEXO",
+        visible: false
+      }, {
+        dataField: "NOME_ANEXO",
+        caption: "Nome do Anexo",
+        alignment: "center",
+      }, {
+        dataField: "TIPO_DOCUMENTO",
+        caption: "Tipo de Documento",
+        alignment: "center",
+      }, {
+        dataField: "DT_ALTERACAO",
+        caption: "Data de Alteração",
+        alignment: "center",
+      }, {
+        caption: "...",
+        alignment: "center",
+        width: 55,
+        cellTemplate: (_, info) => uploadActionCell(info.data),
+      }],
+      export: {
+        enabled: false
+      },
+      columnChooser: {
+        enabled: false
+      },
+      filterRow: {
+        visible: false
+      },
+      allowColumnReordering: false
+    });
+
+    Interface.Telas.Empresa.Instances.GridDocumentos.Refresh = () => {
+      Interface.Telas.Empresa.Instances.GridDocumentos.option("dataSource", getDocAnex());
+    }
+
+    return template;
+  }
+
+  function refreshTabDocumentosEmpresa() {
+    Interface.Telas.Empresa.Instances.GridDocumentos.option("dataSource", getDocAnex());
+  }
+
+  function limparTabDocumentosEmpresa() {
+    Interface.Telas.Empresa.Instances.GridDocumentos.option("dataSource", []);
+  }
+
+  function getDocAnex(action) {
+    Repository().get("getDocAnex", [{
+      name: "ID_EMPRESA_PER",
+      value: Empresa.ID_EMPRESA_PER
+    }], (data) => { dsDocumentosAnex = data },
+      () => App.ui.showGenericError(), null, false
+    )
+    return dsDocumentosAnex;
+  }
+
+  function initTabHistoricoEmpresa() {
+    var template = App.ui.cloneTo(Interface.Telas.Empresa.Templates.Historico.Template).show();
+
+    Interface.Telas.Empresa.Instances.GridHistorico = App.dx.dataGrid(template.find(".grid-historico"), {
+      dataSource: getHistorico(),
+      columns: [{
+        dataField: "ID_CTRL_ATIVIDADE",
+        visible: false
+      }, {
+        dataField: "DT_ALTERACAO",
+        caption: "Data",
+        alignment: "center",
+        width: 110,
+      }, {
+        dataField: "DESCRICAO",
+        caption: "Ação",
+        alignment: "center",
+      }, {
+        dataField: "NOME",
+        caption: "Responsável",
+        alignment: "center",
+      }, {
+        dataField: "DESPACHO",
+        caption: "Observações",
+        alignment: "center",
+        width: 90,
+        cellTemplate: (_, info) => {
+          var descricao = info.data.DESCRICAO
+          var actions = [{
+            icon: "fa fa-eye",
+            name: "Visualizar Despacho",
+            func: () => {
+              var json = info.data;
+              json.action = "Visualizar despacho"
+              initPopupDespacho(json)
+            }
+          }];
+
+          if (descricao == "Correção de Dados da Empresa") {
+            return customActionCell({ actions: actions });
+          } else {
+            return customActionCell({ actions: actions, disabled: true });
+          }
+        }
+      }],
+      export: {
+        enabled: false
+      },
+      columnChooser: {
+        enabled: false
+      },
+      filterRow: {
+        visible: false
+      },
+      allowColumnReordering: false
+    });
+
+    Interface.Telas.Empresa.Instances.GridHistorico.Refresh = () => {
+      Interface.Telas.Empresa.Instances.GridHistorico.option("dataSource", getHistorico())
+    }
+
+    return template;
+  }
+
+  function refreshTabHistoricoEmpresa() {
+    Interface.Telas.Empresa.Instances.GridHistorico.option("dataSource", getHistorico());
+  }
+
+  function limparTabHistoricoEmpresa() {
+    Interface.Telas.Empresa.Instances.GridHistorico.option("dataSource", []);
+  }
+
+  function getHistorico() {
+    Repository().get("getHistorico", [{
+      name: "ID_EMPRESA_PER",
+      value: Empresa.ID_EMPRESA_PER
+    }], (data) => { dsHistorico = data },
+      () => App.ui.showGenericError(), null, false
+    )
+    return dsHistorico
+  }
+
+  function avancarSalvarCancelarDadosEmpresa(obj) {
+    var celular = Interface.Telas.Empresa.Instances.Celular.option("value");
+    var dddCelular = celular.substr(0, 2);
+    var foneCelular = celular.substr(2);
+
+    var residencial = Interface.Telas.Empresa.Instances.Telefone.option("value");
+    var dddResidencial = residencial.substr(0, 2);
+    var foneResidencial = residencial.substr(2);
+
+    var recado = Interface.Telas.Empresa.Instances.TelefoneRecado.option("value");
+    var dddRecado = recado.substr(0, 2);
+    var foneRecado = recado.substr(2);
+
+    var json = {
+      IdAtiv: Dados.IdAtiv,
+      IdEmpresa: Dados.IdEmpresa,
+      CNPJ: Empresa.CNPJ,
+      Empresa: {
+        ID_ENDERECO: Empresa.ID_ENDERECO || null,
+        RAZAO_SOCIAL: Interface.Telas.Empresa.Instances.RazaoSocial.option("value") || "",
+        NOME_FANTASIA: Interface.Telas.Empresa.Instances.NomeFantasia.option("value"),
+        INSCRICAO_ESTADUAL: Interface.Telas.Empresa.Instances.InscricaoEstadual.option("value"),
+        DT_ABERTURA: App.data.formatDate(Interface.Telas.Empresa.Instances.DtAbertura.option("value")),
+        DESCR_CEP: Interface.Telas.Empresa.Instances.CEP.option("value"),
+        DESCR_RUA: Interface.Telas.Empresa.Instances.Logradouro.option("value"),
+        DESCR_NUMERO: Interface.Telas.Empresa.Instances.Numero.option("value"),
+        DESCR_COMPLEMENTO: Interface.Telas.Empresa.Instances.Complemento.option("value"),
+        DESCR_BAIRRO: Interface.Telas.Empresa.Instances.Bairro.option("value"),
+        DESCR_MUNICIPIO: Interface.Telas.Empresa.Instances.Cidade.option("value"),
+        DESCR_UF: Interface.Telas.Empresa.Instances.Estado.option("value"),
+        DESCR_MAIL: Interface.Telas.Empresa.Instances.Email.option("value"),
+        DDD_CELULAR: dddCelular,
+        FONE_CELULAR: foneCelular,
+        DDD_RESIDENCIAL: dddResidencial,
+        FONE_RESIDENCIAL: foneResidencial,
+        DDD_RECADO: dddRecado,
+        FONE_RECADO: foneRecado,
+      },
+      Ctrl: Dados.Ctrl
+    }
+
+    if (obj.Botao == "Avançar") {
+      json.action = "Avançar"
+      json.op = "AVANCAR_INFORMAR_DADOS_EMPRESA"
+
+      if (Interface.Telas.Empresa.Instances.GridAnexar && Interface.Telas.Empresa.Instances.GridAnexar.Check) {
+        Interface.Telas.Empresa.Instances.GridAnexar.Check(() => {
+          if (!validateAll(Interface.Telas.Empresa.Instances)) return;
+          else if (!Interface.Telas.Empresa.Instances.Email.EmailValidado || (Interface.Telas.Empresa.Instances.Email.EmailValidado != Interface.Telas.Empresa.Instances.Email.option("value"))) {
+            App.ui.showWarning("Valide o e-mail informado para prosseguir!");
+            return;
+          } else {
+            DevExpress.ui.dialog.confirm("Confirmar dados e prosseguir com a solicitação?", "Confirmação").done(
+              (result) => {
+                if (result) { saveActionDadosEmpresa(json) }
+              })
+          }
+        })
+      }
+    } else if (obj.Botao == "Salvar") {
+      if (Ativ.ETAPA == "Correção de Dados da Empresa") {
+        json.Empresa.SITUACAO_ITEM = 4 //Corrigindo Dados
+      } else {
+        json.Empresa.SITUACAO_ITEM = 1 //Situação Padrão
+      }
+
+      json.action = "Salvar"
+      json.op = "SALVAR_INFORMAR_DADOS_EMPRESA"
+
+      if (json.Empresa.DESCR_MAIL == Empresa.DESCR_MAIL) {
+        json.Empresa.DESCR_MAIL = Empresa.DESCR_MAIL
+      } else {
+        json.Empresa.DESCR_MAIL = null
+      }
+
+      if (Ativ.ETAPA_ITEM == 2000) {
+        message = "Ao salvar os dados, você terá que preencher o campo de email novamente (caso já tenha preenchido). Deseja salvar os dados e retornar ao menu principal?"
+      } else {
+        message = "Ao salvar os dados, caso você tenha alterado o email terá que preenchê-lo novamente. Deseja salvar os dados e retornar ao menu principal?"
+      }
+
+      DevExpress.ui.dialog.confirm(message, "Confirmação").done(
+        (result) => {
+          if (result) { saveActionDadosEmpresa(json) }
+        })
+    } else {
+      json.action = "Cancelar"
+      json.op = "CANCELAR_INFORMAR_DADOS_EMPRESA"
+
+      if (!Empresa.RAZAO_SOCIAL && !Empresa.ID_ENDERECO) {
+        json.Empresa = {}
+      }
+
+      DevExpress.ui.dialog.confirm("Deseja cancelar o cadastro da empresa? Após o cancelamento será necessário preencher todos os dados novamente.",
+        "Confirmar cancelamento").done((result) => {
+          if (result) { saveActionDadosEmpresa(json) }
+        })
+    }
+  }
+
+  function saveActionDadosEmpresa(json) {
+    App.service.execute(Dados.Instancia.IdVersao, { instOrigem: Dados.Instancia.IdInstancia, op: json.op, json: $.base64.encode(JSON.stringify(json)) }, ["dados"], true, false,
+      (response) => {
+        try {
+          var obj = trataResponse(response.dados);
+
+          if (obj.Errors) {
+            App.ui.showErrorsFromResponse(obj.Errors);
+            App.ui.unblockElement();
+          } else {
+            if (json.action == "Avançar") {
+              App.ui.showSuccess("Solicitação enviada para etapa de análise!");
+            } else if (json.action == "Salvar") {
+              App.ui.showSuccess("Dados da empresa salvos!")
+            } else {
+              App.ui.showSuccess("Cadastro cancelado!")
+            }
+
+            Dados.IdAtiv = obj.IdAtiv;
+            Dados.IdEmpresa = obj.IdEmpresa;
+
+            App.ui.unblockElement();
+            trocaTela(Interface.Telas.MinhasEmpresas, false);
+          }
+        } catch (e) {
+          if (json.action == "Avançar") {
+            App.ui.showAndSaveError(e, "Erro ao enviar a solicitação para etapa de análise!")
+          } else if (json.action == "Salvar") {
+            App.ui.showAndSaveError(e, "Erro ao salvar os dados da empresa!")
+          } else {
+            App.ui.showAndSaveError(e, "Erro ao cancelar o cadastro!")
+          }
+          App.ui.unblockElement();
+        }
+      });
+  }
+
+  function deferirCorrecaoIndeferirAnalise(obj) {
+    var json = {
+      action: obj.action || "",
+      op: obj.op,
+      IdAtiv: Dados.IdAtiv,
+      IdEmpresa: Dados.IdEmpresa,
+      CNPJ: Empresa.CNPJ,
+      Ctrl: Dados.Ctrl,
+      ID_PESSOA_ANALISE: Dados.Ctrl.IdPessoa,
+      Empresa: {
+        ID_ENDERECO: Empresa.ID_ENDERECO || null,
+        RAZAO_SOCIAL: Interface.Telas.Empresa.Instances.RazaoSocial.option("value"),
+        NOME_FANTASIA: Interface.Telas.Empresa.Instances.NomeFantasia.option("value"),
+        INSCRICAO_ESTADUAL: Interface.Telas.Empresa.Instances.InscricaoEstadual.option("value"),
+        DT_ABERTURA: App.data.formatDate(Interface.Telas.Empresa.Instances.DtAbertura.option("value"))
+      }
+    }
+
+    if (obj.Botao == "Deferir") {
+      json.action = "Deferir Cadastro"
+      App.service.execute(Dados.Instancia.IdVersao, { op: "DEFERIR_ANALISE_CADASTRO_EMPRESA", json: $.base64.encode(JSON.stringify(json)) }, ["dados"], true, false,
+        (response) => {
+          try {
+            var obj = trataResponse(response.dados);
+
+            if (obj.Errors) {
+              App.ui.showErrorsFromResponse(obj.Errors);
+              App.ui.unblockElement();
+            } else {
+              App.ui.showSuccess("Cadastro deferido!")
+              trocaTela(Interface.Telas.MinhasEmpresas, false);
+            }
+          } catch (e) {
+            App.ui.showAndSaveError(e, "Erro ao deferir o cadastro!")
+            App.ui.unblockElement();
+          }
+        }
+      );
+    }
+    else if (obj.Botao == "Correção") {
+      json.action = "Corrigir Cadastro"
+      json.op = "CORRECAO_ANALISE_CADASTRO_EMPRESA"
+      initPopupDespacho(json)
+    } else if (obj.Botao == "Indeferir") {
+      json.action = "Indeferir Cadastro"
+      json.op = "INDEFERIR_ANALISE_CADASTRO_EMPRESA"
+      initPopupDespacho(json)
+    }
+  }
+
+  // var self = {
+  //   init: () => initDados()
+  // }
+
+  // return self;
+  // 10 - end.js
+  // }();
+  $(function () {
+    $btnNext = $.BPMAction(152031374).find("input");
+    $operador = $.BPMAction(152110751).find("input");
+    $menuIdSel = $.BPMAction(151220717).find("input");
+
+    // setTimeout(() => instanceUI.init());
+    setTimeout(() => initDados());
+  });
+</script>
+<!--end:script-->
